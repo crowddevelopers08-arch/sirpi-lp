@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { CheckCircle2, Phone, ArrowLeft, PhoneCall, CalendarCheck, Stethoscope } from "lucide-react"
+import { CheckCircle2, Phone, PhoneCall, CalendarCheck, Stethoscope } from "lucide-react"
 import { FaWhatsapp } from "react-icons/fa"
 import { track } from "./track"
 import { WHATSAPP_URL } from "./config"
@@ -17,7 +17,7 @@ interface ThankYouPanelProps {
   /** Numbers to offer back, in display order — the first is the primary CTA. */
   phones: readonly { display: string; tel: string }[]
   /** Where "back to home" goes, and what it is called. */
-  homeHref: string
+  homeHref?: string
   homeLabel?: string
   /** Branch tag pushed to the dataLayer, so conversions are separable by page. */
   branch: string
@@ -32,7 +32,7 @@ interface ThankYouPanelProps {
  * the same promise on every page, and two drifting versions of it would be a
  * worse outcome than one that reads slightly general.
  */
-export default function ThankYouPanel({ phones, homeHref, homeLabel = "Back to home", branch }: ThankYouPanelProps) {
+export default function ThankYouPanel({ phones, branch }: ThankYouPanelProps) {
   /* Same dataLayer push as before, through the helper that owns the window
      typing — and, being neither lead_submit nor a click, still no Pixel event. */
   useEffect(() => track("lead_thank_you", { branch }), [branch])
@@ -52,11 +52,8 @@ export default function ThankYouPanel({ phones, homeHref, homeLabel = "Back to h
           to confirm your slot.
         </p>
 
-        {/* A grid, not a flex row. Three buttons abreast could not hold two full
-            phone numbers and "Chat on WhatsApp" inside a 680px card, so each
-            label wrapped mid-number and the three ended up different widths.
-            Two equal columns fit a number comfortably; WhatsApp takes the row
-            under them, where it reads as the alternative it is. */}
+        {/* One number plus WhatsApp: two equal columns on one row from `sm`,
+            stacked on phones where the full number needs the whole width. */}
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           {phones.map((p, i) => (
             <a
@@ -73,7 +70,7 @@ export default function ThankYouPanel({ phones, homeHref, homeLabel = "Back to h
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-purple w-full whitespace-nowrap sm:col-span-2"
+            className="btn btn-purple w-full whitespace-nowrap"
           >
             <FaWhatsapp className="h-4 w-4 flex-none" />
             Chat on WhatsApp
@@ -96,13 +93,6 @@ export default function ThankYouPanel({ phones, homeHref, homeLabel = "Back to h
           </li>
         ))}
       </ol>
-
-      <p className="mt-6 text-center">
-        <a href={homeHref} className="inline-flex items-center gap-2 text-[0.9rem] font-semibold text-[var(--e-green-deep)] hover:underline">
-          <ArrowLeft className="h-4 w-4" />
-          {homeLabel}
-        </a>
-      </p>
     </div>
   )
 }

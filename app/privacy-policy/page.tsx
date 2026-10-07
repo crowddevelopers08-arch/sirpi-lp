@@ -30,7 +30,7 @@ const RIGHTS = [
   "Opt out of promotional communications.",
 ]
 
-/** Numbered section header — green chip, deep-green title, consistent per section. */
+/** Numbered section header — burgundy chip, deep-burgundy title, consistent per section. */
 function SectionHead({ n, icon: Icon, title }: { n: number; icon: React.ElementType; title: string }) {
   return (
     <div className="mb-4 flex items-center gap-3">
@@ -51,7 +51,7 @@ const PrivacyPolicy: React.FC = () => {
 
       <main className="ribbon-wash flex-1 bg-[var(--e-canvas)] py-8 sm:py-12">
         <section className="mx-auto w-full max-w-4xl overflow-hidden rounded-[24px] border border-[var(--e-line)] bg-white shadow-[0_30px_60px_-36px_rgba(14,22,38,0.28)]">
-          {/* brand bar — green running into purple, as in the EM monogram */}
+          {/* brand bar — burgundy running into rose, as in the Sirpi logo */}
           <div className="h-1.5 w-full bg-[linear-gradient(90deg,var(--e-green),var(--e-purple))]" aria-hidden />
 
           <div className="px-4 py-8 leading-relaxed text-[var(--e-ink-soft)] sm:px-6 md:px-10">
@@ -59,7 +59,7 @@ const PrivacyPolicy: React.FC = () => {
             <div className="mb-8 text-center">
               <p className="kicker justify-center">Your privacy</p>
               <h1 className="mb-2 mt-3 text-2xl font-bold text-[var(--e-ink)] sm:text-3xl md:text-4xl">Privacy Policy</h1>
-              <p className="text-[var(--e-muted)]">{BRAND} — The Surgical Speciality Clinic</p>
+              <p className="text-[var(--e-muted)]">{BRAND} — Cosmetic Surgery Centre</p>
             </div>
 
             {/* Intro */}
@@ -179,8 +179,6 @@ const PrivacyPolicy: React.FC = () => {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   )
 }

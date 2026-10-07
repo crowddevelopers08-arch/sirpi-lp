@@ -84,7 +84,7 @@ export default function GynThankYou() {
           className="inline-flex items-center gap-2 text-[0.78rem] font-bold uppercase tracking-[0.16em] text-[var(--g-text)] hover:underline"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Elite-Minima
+          Back to Sirpi Aesthetics
         </a>
       </p>
     </div>

@@ -9,7 +9,7 @@ import { cldTransform, IMAGES } from "../config"
 
 /** Branch tag on every lead, analytics event and CRM row from this page, so
     gynecomastia traffic is separable from / and /general. */
-export const GYN_BRANCH = "Elite Minima Clinic — Gynecomastia"
+export const GYN_BRANCH = "Sirpi Aesthetics Clinic — Gynecomastia"
 
 export { PHONE_DISPLAY as GYN_PHONE_DISPLAY, PHONE_TEL as GYN_PHONE_TEL } from "../config"
 
@@ -46,12 +46,12 @@ export const HERO_MEDIA: { video: string; slides: GynHeroSlide[] } = {
   slides: [
     {
       src: IMAGES.chestContouring,
-      alt: "Advanced male chest contouring — gynecomastia correction at Elite-Minima",
+      alt: "Advanced male chest contouring — gynecomastia correction at Sirpi Aesthetics",
       caption: "Chest contouring",
     },
     {
       src: IMAGES.surgicalTeam,
-      alt: "The Elite-Minima surgical team in theatre",
+      alt: "The Sirpi Aesthetics surgical team in theatre",
       caption: "Our surgical team",
     },
   ],
@@ -82,7 +82,7 @@ export const HERO_CONCERNS = [
 
 export const REVIEWS_INTRO = {
   title: "Real Patients. Real Experiences.",
-  body: "Choosing gynecomastia treatment can be a personal decision. Hear from patients about their consultation, procedure, recovery, and overall experience at Elite-Minima.",
+  body: "Choosing gynecomastia treatment can be a personal decision. Hear from patients about their consultation, procedure, recovery, and overall experience at Sirpi Aesthetics.",
 } as const
 
 export interface GynReview {
@@ -287,7 +287,7 @@ export const SURGEON = {
 export const CLINIC = {
   title: "Expert Gynecomastia Care in Anna Nagar",
   body: [
-    "At Elite-Minima, gynecomastia treatment is planned around one goal: providing the right correction for the individual patient.",
+    "At Sirpi Aesthetics, gynecomastia treatment is planned around one goal: providing the right correction for the individual patient.",
     "From your first evaluation through surgery and follow-up, the team focuses on clear communication, personalized treatment planning, patient safety, and comfortable recovery.",
   ],
   reasons: [

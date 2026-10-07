@@ -1,11 +1,11 @@
-// Design tokens for the Elite Minima landing page.
+// Design tokens for the Sirpi Aesthetics landing page.
 //
 // Styling is inline-Tailwind only — there is no custom CSS layer — so these
 // constants are the single source of truth for values that repeat across
 // sections. Import them rather than retyping hex codes.
 
 /* ── Palette ──────────────────────────────────────────────────────────────
-   Sampled directly from the Elite Minima logo: the forest green of the
+   Legacy palette (unused by the Sirpi pages, kept for old imports): the forest green of the
    "ELITE - MINIMA" wordmark, the royal purple of the EM monogram and
    tagline, and the slate navy of the monogram's left stroke.
 

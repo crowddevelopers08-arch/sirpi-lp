@@ -5,48 +5,48 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   Brand tokens sampled from the Elite Minima logo:
-     forest green  #17743C  (the "ELITE - MINIMA" wordmark)
-     royal purple  #513E98  (the EM monogram + tagline)
-     slate navy    #394B79  (the monogram's left stroke)
-     lavender wash #EEE9F7  (the flowing background ribbons)
-   Green carries the UI (primary actions, trust); purple is the
-   accent that ties surfaces back to the mark.
+   Brand tokens from the Sirpi logo:
+     burgundy  #6A113D  (the logo ground)
+     coral     #ED575C  (the two dots)
+     rose      #A52D5B  (coral deepened until it reads as text)
+     bone      #FFF8FA  (white warmed toward burgundy)
+   Burgundy carries the UI (primary actions, trust); coral/rose is
+   the accent that ties surfaces back to the mark.
    ============================================================ */
 :root {
-  --background: oklch(1 0 0); /* White background */
-  --foreground: oklch(0.19 0.024 260); /* Deep slate-navy ink #0E1626 */
-  --card: oklch(1 0 0); /* White card background */
-  --card-foreground: oklch(0.19 0.024 260);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.19 0.024 260);
-  --primary: oklch(0.47 0.126 152); /* Brand green #17743C */
-  --primary-foreground: oklch(1 0 0); /* White text on green */
-  --secondary: oklch(0.42 0.166 291); /* Brand purple #513E98 */
-  --secondary-foreground: oklch(1 0 0); /* White text on purple */
-  --muted: oklch(0.97 0.005 285); /* Faint lavender-grey surface */
-  --muted-foreground: oklch(0.51 0.024 260); /* AA muted text #5A6478 */
-  --accent: oklch(0.95 0.017 292); /* Lavender wash #F0ECFA */
-  --accent-foreground: oklch(0.35 0.14 291); /* Deep purple on wash */
+  --background: #ffffff;
+  --foreground: #1f0a14; /* near-black ink with a burgundy cast */
+  --card: #ffffff;
+  --card-foreground: #1f0a14;
+  --popover: #ffffff;
+  --popover-foreground: #1f0a14;
+  --primary: #6a113d; /* Brand burgundy */
+  --primary-foreground: #ffffff;
+  --secondary: #a52d5b; /* Brand rose */
+  --secondary-foreground: #ffffff;
+  --muted: #fff8fa; /* Bone surface */
+  --muted-foreground: #78465d; /* AA muted text */
+  --accent: #f9e8ef; /* Blush wash */
+  --accent-foreground: #6a113d;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.92 0.006 275); /* Neutral hairline #E5E7EF */
-  --input: oklch(1 0 0);
-  --ring: oklch(0.47 0.126 152); /* Green focus ring */
-  --chart-1: oklch(0.47 0.126 152); /* green */
-  --chart-2: oklch(0.42 0.166 291); /* purple */
-  --chart-3: oklch(0.42 0.075 265); /* slate navy */
-  --chart-4: oklch(0.6 0.11 155); /* light green */
-  --chart-5: oklch(0.63 0.12 293); /* light purple */
+  --border: #f0dde5; /* Blush hairline */
+  --input: #ffffff;
+  --ring: #6a113d; /* Burgundy focus ring */
+  --chart-1: #6a113d; /* burgundy */
+  --chart-2: #ed575c; /* coral */
+  --chart-3: #a52d5b; /* rose */
+  --chart-4: #f48286; /* soft coral */
+  --chart-5: #b77591; /* dusty rose */
   --radius: 0.625rem;
-  --sidebar: oklch(0.98 0.004 285);
-  --sidebar-foreground: oklch(0.19 0.024 260);
-  --sidebar-primary: oklch(0.47 0.126 152);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.95 0.017 292);
-  --sidebar-accent-foreground: oklch(0.35 0.14 291);
-  --sidebar-border: oklch(0.92 0.006 275);
-  --sidebar-ring: oklch(0.47 0.126 152);
+  --sidebar: #fff8fa;
+  --sidebar-foreground: #1f0a14;
+  --sidebar-primary: #6a113d;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f9e8ef;
+  --sidebar-accent-foreground: #6a113d;
+  --sidebar-border: #f0dde5;
+  --sidebar-ring: #6a113d;
 }
 
 .dark {
@@ -225,7 +225,7 @@
 }
 
 /* ============================================================
-   ELITE MINIMA — Piles / Proctology landing page
+   SIRPI AESTHETICS — Piles / Proctology landing page
    Scoped design system under .elite. A flat, modern SaaS-style
    system (Lato only, thin borders, soft shadows) built on the
    logo's own colours.
@@ -235,7 +235,7 @@
    ============================================================ */
 .elite {
   /* Sirpi logo palette: burgundy #6A113D, coral #ED575C, and white — the same
-     hues as .gyn below. The variable names are kept from the old Elite-Minima
+     hues as .gyn below. The variable names are kept from the old
      palette (green = primary, purple = accent) so no component had to change. */
   --e-ink: #1f0a14;      /* near-black with a burgundy cast */
   --e-ink-soft: #3d1a2b;
@@ -487,7 +487,7 @@
 }
 
 /* ============================================================
-   ELITE MINIMA — Circumcision landing page  (/circumcision)
+   SIRPI AESTHETICS — Circumcision landing page  (/circumcision)
 
    Scoped design system under .circ. The structure is .gyn's
    editorial treatment — square corners, hairline rules, outlined
@@ -1086,7 +1086,7 @@
 }
 
 /* ============================================================
-   ELITE MINIMA — Gynecomastia landing page  (/gynecomastia)
+   SIRPI AESTHETICS — Gynecomastia landing page  (/gynecomastia)
    Scoped design system under .gyn. Deliberately shares NOTHING
    with .elite above except the brand hues: where .elite is a
    white, pill-shaped, soft-shadowed SaaS system, this one is a

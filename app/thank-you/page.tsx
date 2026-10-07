@@ -15,10 +15,8 @@ export default function ThankYouPage() {
       <Header />
 
       <main className="ribbon-wash relative flex flex-1 items-center justify-center overflow-hidden bg-[var(--e-canvas)] px-5 py-14 sm:py-20">
-        <ThankYouPanel phones={PHONES} homeHref="/" branch="Elite Minima Clinic" />
+        <ThankYouPanel phones={PHONES} branch="Sirpi Aesthetics Clinic" />
       </main>
-
-      <Footer />
     </div>
   )
 }

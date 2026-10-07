@@ -28,7 +28,7 @@ export default function GynClinic() {
           {/* ── Copy, above the photograph on mobile ───────────────────── */}
           <div className="min-w-0 lg:col-start-1 lg:row-start-1">
             <Reveal>
-              <p className="g-eyebrow">About Elite-Minima</p>
+              <p className="g-eyebrow">About Sirpi Aesthetics</p>
               <h2 className="mt-5 max-w-[16ch]">{CLINIC.title}</h2>
               <div className="mt-6 space-y-4">
                 {CLINIC.body.map((p) => (
@@ -45,14 +45,14 @@ export default function GynClinic() {
             <div className="relative aspect-[4/5] w-full overflow-hidden border border-[var(--g-line)] bg-[var(--g-raised)]">
               <Image
                 src={IMAGES.surgicalTeam}
-                alt="Surgical team operating in theatre at Elite-Minima – The Surgical Speciality Clinic"
+                alt="Surgical team operating in theatre at Sirpi Aesthetics – Cosmetic Surgery Centre"
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-cover object-center"
               />
               <span aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(106,17,61,0.85))]" />
               <p className="absolute bottom-5 left-5 right-5 text-[0.78rem] uppercase tracking-[0.18em] text-white/85">
-                Elite-Minima — The Surgical Speciality Clinic
+                Sirpi Aesthetics — Cosmetic Surgery Centre
               </p>
             </div>
           </Reveal>
@@ -60,7 +60,7 @@ export default function GynClinic() {
           {/* ── Copy, below the photograph on mobile ───────────────────── */}
           <div className="min-w-0 lg:col-start-1 lg:row-start-2">
             <Reveal delay={0.08} className="mt-10">
-              <p className="text-[0.64rem] font-bold uppercase tracking-[0.24em] text-[var(--g-text)]">Why Elite-Minima?</p>
+              <p className="text-[0.64rem] font-bold uppercase tracking-[0.24em] text-[var(--g-text)]">Why Sirpi Aesthetics?</p>
             </Reveal>
 
             {/* Hairline cells — a two-up grid held together by the gap-px rule

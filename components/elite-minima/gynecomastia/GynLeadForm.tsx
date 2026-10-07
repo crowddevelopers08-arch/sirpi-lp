@@ -1,16 +1,17 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { ArrowRight, Lock } from "lucide-react"
 import { track } from "../track"
 import { PHONES } from "../config"
-import { GYNECOMASTIA_LEADS_FORM } from "@/lib/forms"
 import { GYN_BRANCH } from "./content"
 
-const LEAD_ENDPOINT = "/api/leads"
+const LEAD_ENDPOINT = "/api/submissions"
 
-/** What the visitor thinks they need. Rides the lead API's generic `area`
-    field, which is the Concern column in the sheet. */
+/** Shown in the sheet's Source column and as the TeleCRM "Form Name" note. */
+const LEAD_SOURCE = "Gynecomastia Lead Form"
+
+/** What the visitor thinks they need — the sheet's Concern column. */
 const CONCERNS = [
   "Gynecomastia — not sure of the cause",
   "Excess chest fat",
@@ -30,21 +31,6 @@ export default function GynLeadForm() {
   const formRef = useRef<HTMLFormElement>(null)
   const [submitting, setSubmitting] = useState(false)
 
-  // Fill the attribution fields once the URL is readable on the client.
-  useEffect(() => {
-    const form = formRef.current
-    if (!form) return
-
-    const q = new URLSearchParams(window.location.search)
-    ;["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"].forEach((k) => {
-      const el = form.querySelector<HTMLInputElement>(`[name="${k}"]`)
-      if (el) el.value = q.get(k) || ""
-    })
-
-    const pageUrl = form.querySelector<HTMLInputElement>('[name="page_url"]')
-    if (pageUrl) pageUrl.value = window.location.href
-  }, [])
-
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = formRef.current
@@ -58,21 +44,15 @@ export default function GynLeadForm() {
     setSubmitting(true)
     const raw = Object.fromEntries(new FormData(form).entries()) as Record<string, string>
 
+    // Only the fields the visitor filled in, plus the page they sent it from.
     const payload = {
+      source: LEAD_SOURCE,
       name: raw.name,
       phone: raw.phone,
       email: raw.email,
-      address: raw.address,
-      // No dedicated treatment column on the lead API — the clinical answer
-      // rides `area`, which is the sheet's Concern column.
-      area: raw.concern,
-      branch: GYN_BRANCH,
-      // Own TeleCRM FormName and own tab of the sheet — see lib/forms.ts.
-      formName: GYNECOMASTIA_LEADS_FORM,
-      source: raw.utm_source || "direct",
-      medium: raw.utm_medium || "",
-      campaign: raw.utm_campaign || "",
-      pageUrl: raw.page_url || (typeof window !== "undefined" ? window.location.href : ""),
+      city: raw.address,
+      concern: raw.concern,
+      pageUrl: window.location.href,
     }
 
     try {
@@ -81,10 +61,11 @@ export default function GynLeadForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       })
-      if (!res.ok) throw new Error(`Request failed with ${res.status}`)
+      const data = (await res.json().catch(() => null)) as { success?: boolean } | null
+      if (!res.ok || !data?.success) throw new Error(`Request failed with ${res.status}`)
 
       track("lead_submit", { branch: GYN_BRANCH, treatment: raw.concern })
-      window.location.href = "/gynecomastia/thank-you"
+      window.location.href = "/thank-you"
     } catch {
       setSubmitting(false)
       alert(`That did not go through. Please call ${PHONES.map((phone) => phone.display).join(" or ")} instead.`)
@@ -139,15 +120,6 @@ export default function GynLeadForm() {
           </select>
         </Field>
       </div>
-
-      <input type="hidden" name="utm_source" />
-      <input type="hidden" name="utm_medium" />
-      <input type="hidden" name="utm_campaign" />
-      <input type="hidden" name="utm_content" />
-      <input type="hidden" name="utm_term" />
-      <input type="hidden" name="fbclid" />
-      <input type="hidden" name="gclid" />
-      <input type="hidden" name="page_url" />
 
       <div className="mt-8 flex flex-col gap-4 @min-[540px]:flex-row @min-[540px]:items-center">
         <button type="submit" disabled={submitting} className="g-btn g-btn-solid group/btn w-full @min-[540px]:w-auto">
