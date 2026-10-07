@@ -2,19 +2,9 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Cormorant_Garamond, Inter } from 'next/font/google';
 
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  display: 'swap',
-});
+// Lato, the site's typeface, is loaded once in app/layout.tsx as --font-lato.
+const FONT = 'font-[family-name:var(--font-lato)]';
 
 const RATINGS = ['Terrible', 'Poor', 'Okay', 'Good', 'Excellent'];
 const EMOJIS = ['😞', '😟', '😐', '😊', '🤩'];
@@ -93,7 +83,7 @@ export default function ReviewPage() {
 
   return (
     <main
-      className={`${inter.className} min-h-screen flex items-center justify-center bg-[#FFF8FA] px-4 py-8`}
+      className={`${FONT} min-h-screen flex items-center justify-center bg-[#FFF8FA] px-4 py-8`}
     >
 
       <div
@@ -129,7 +119,7 @@ export default function ReviewPage() {
             </div>
 
             <div className="text-center">
-              <h2 className={`${cormorant.className} text-[28px] font-semibold text-[#6A113D] leading-tight`}>How was your experience?</h2>
+              <h2 className={`${FONT} text-[28px] font-semibold text-[#6A113D] leading-tight`}>How was your experience?</h2>
               <p className="text-[#6A113D]/70 text-[15px] mt-1 leading-relaxed">
                 Please rate your visit. Your feedback<br />helps us improve our care.
               </p>
@@ -169,7 +159,7 @@ export default function ReviewPage() {
             </div>
 
             <div className="text-center">
-              <h2 className={`${cormorant.className} text-[28px] font-semibold text-[#6A113D] leading-tight`}>Tell us how we can improve</h2>
+              <h2 className={`${FONT} text-[28px] font-semibold text-[#6A113D] leading-tight`}>Tell us how we can improve</h2>
               <p className="text-[#6A113D]/70 text-[14px] mt-1 leading-relaxed">
                 We&apos;re sorry your experience was not perfect.<br />Please share your concern with us.
               </p>
@@ -273,7 +263,7 @@ export default function ReviewPage() {
             </div>
 
             <div className="text-center">
-              <h2 className={`${cormorant.className} text-[32px] font-semibold text-[#6A113D] leading-tight`}>Thank you for your feedback!</h2>
+              <h2 className={`${FONT} text-[32px] font-semibold text-[#6A113D] leading-tight`}>Thank you for your feedback!</h2>
               <p className="text-[#6A113D]/70 text-[15px] mt-1 leading-relaxed">
                 We&apos;re glad you had a great experience.<br />Please share it with us.
               </p>
@@ -310,7 +300,7 @@ export default function ReviewPage() {
               <span className="text-3xl">🙏</span>
             </div>
             <div className="text-center">
-              <h2 className={`${cormorant.className} text-[26px] font-semibold text-[#6A113D] leading-tight`}>Thank you for your feedback!</h2>
+              <h2 className={`${FONT} text-[26px] font-semibold text-[#6A113D] leading-tight`}>Thank you for your feedback!</h2>
               <p className="text-[#6A113D]/70 text-[13px] mt-1 leading-relaxed">
                 We appreciate your honesty and<br />will work to improve.
               </p>
