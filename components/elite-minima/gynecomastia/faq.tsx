@@ -61,7 +61,7 @@ const FAQSection = () => {
               {/* Div 1 - Larger left area */}
               <div className="col-span-4 row-span-6 bg-gradient-to-br from-[var(--g-accent)] to-[var(--g-violet-deep)] rounded-2xl overflow-hidden shadow-lg">
                 <img
-                  src="/faq-1.JPG"
+                  src="/faq-1.jpg"
                   alt="Medical consultation"
                   className="w-full h-full object-cover"
                 />
@@ -70,7 +70,7 @@ const FAQSection = () => {
               {/* Div 2 - Top right */}
               <div className="col-span-3 row-span-3 col-start-5 bg-gradient-to-br from-[var(--g-base)] to-[var(--g-raised)] rounded-2xl overflow-hidden shadow-lg">
                 <img
-                  src="/faq-2.JPG"
+                  src="/faq-2.jpg"
                   alt="Healthcare professional"
                   className="w-full h-full object-cover"
                 />
@@ -79,7 +79,7 @@ const FAQSection = () => {
               {/* Div 3 - Bottom right */}
               <div className="col-span-3 row-span-3 col-start-5 row-start-4 bg-gradient-to-br from-[var(--g-accent)] to-[var(--g-violet-deep)] rounded-2xl overflow-hidden shadow-lg">
                 <img
-                  src="/faq-3.JPG"
+                  src="/faq-3.jpg"
                   alt="Medical equipment"
                   className="w-full h-full object-cover"
                 />
@@ -111,7 +111,7 @@ const FAQSection = () => {
               {/* Div 1 - Larger left area - Takes 2 columns, full height */}
               <div className="col-span-2 row-span-4 bg-gradient-to-br from-[var(--g-accent)] to-[var(--g-violet-deep)] rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg">
                 <img
-                  src="/faq-1.JPG"
+                  src="/faq-1.jpg"
                   alt="Medical consultation"
                   className="w-full h-full object-cover"
                 />
@@ -120,7 +120,7 @@ const FAQSection = () => {
               {/* Div 2 - Top right - Takes 1 column, 2 rows */}
               <div className="col-span-1 row-span-2 col-start-3 bg-gradient-to-br from-[var(--g-base)] to-[var(--g-raised)] rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg">
                 <img
-                  src="/faq-2.JPG"
+                  src="/faq-2.jpg"
                   alt="Healthcare professional"
                   className="w-full h-full object-cover"
                 />
@@ -129,7 +129,7 @@ const FAQSection = () => {
               {/* Div 3 - Bottom right - Takes 1 column, 2 rows */}
               <div className="col-span-1 row-span-2 col-start-3 row-start-3 bg-gradient-to-br from-[var(--g-accent)] to-[var(--g-violet-deep)] rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg">
                 <img
-                  src="/faq-3.JPG"
+                  src="/faq-3.jpg"
                   alt="Medical equipment"
                   className="w-full h-full object-cover"
                 />
