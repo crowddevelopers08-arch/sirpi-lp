@@ -316,7 +316,7 @@ export default function LearningDevelopment() {
                 >
                   {s.no}
                 </span>
-                <div className="flex min-w-0 flex-1 items-center gap-3 rounded-none bg-white px-4 py-2.5 shadow-[0_4px_10px_rgba(106,17,61,0.2)]">
+                <div className="flex min-w-0 flex-1 items-center gap-3 rounded-full bg-white py-2.5 pl-4 pr-6 shadow-[0_4px_10px_rgba(106,17,61,0.2)]">
                   <span className="h-7 w-7 shrink-0" style={{ color: INK }}>
                     {s.icon}
                   </span>

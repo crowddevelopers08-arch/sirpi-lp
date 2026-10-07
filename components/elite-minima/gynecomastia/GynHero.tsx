@@ -123,7 +123,7 @@ export default function GynecomastiaBanner() {
       {/* ================================================================
           MOBILE / TABLET (< 1024px) — stacked flow layout
       ================================================================= */}
-      <div className="relative isolate overflow-hidden px-5 py-10 lg:hidden">
+      <div className="relative isolate overflow-hidden px-5 py-5 lg:hidden">
         <Blobs />
 
         <div className="relative z-10 mx-auto max-w-[640px]">
