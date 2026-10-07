@@ -216,14 +216,14 @@ export default function GynecomastiaBanner() {
           {/* buttons — moved to the end on mobile so the persuasion (stats,
               before/after, benefits) reads before the ask. */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <button
-              type="button"
+            <a
+              href="#book"
               className="flex items-center justify-center gap-2 rounded-md px-6 py-2 text-[16px] font-medium text-white transition hover:brightness-110"
               style={{ backgroundColor: "var(--g-accent-deep)" }}
             >
               Book Your Consultation
               <ArrowRight className="h-[18px] w-[18px]" />
-            </button>
+            </a>
 
             <a
               href={`tel:${PHONE.replace(/\s/g, "")}`}
@@ -360,14 +360,14 @@ export default function GynecomastiaBanner() {
           className="absolute z-10 flex items-stretch"
           style={{ left: "10.67%", top: "64.02%", width: "36.23%", height: "8.14%", gap: "1.06cqw" }}
         >
-          <button
-            type="button"
+          <a
+            href="#book"
             className="flex min-w-0 flex-[1.10] items-center justify-center whitespace-nowrap rounded-md text-white transition hover:brightness-110"
             style={{ gap: "0.6cqw", fontSize: "1.05cqw", backgroundColor: "var(--g-accent-deep)" }}
           >
             Book Your Consultation
             <ArrowRight className="shrink-0" style={{ width: "1.32cqw", height: "1.32cqw" }} />
-          </button>
+          </a>
 
           <a
             href={`tel:${PHONE.replace(/\s/g, "")}`}
