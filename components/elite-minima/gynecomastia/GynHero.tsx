@@ -132,7 +132,7 @@ export default function GynecomastiaBanner() {
           <div className="mt-3 text-[30px] font-extrabold leading-[1.15] tracking-[-0.015em] sm:text-[40px]">
             <span style={{ color: "#000000" }}>Male Gynecomastia</span>
             <br />
-            <span style={{ color: "#000000" }}> Surgery in Chennai</span>
+            <span style={{ color: "#000000" }}> Surgery in Coimbatore</span>
           </div>
 
           {/* before / after — comes right after the label/heading/subheading
