@@ -279,7 +279,7 @@ export default function GynecomastiaBanner() {
             whiteSpace: "nowrap",
           }}
         >
-          Surgery in Chennai
+          Surgery in Coimbatore
         </div>
 
         {/* ---------- stat dividers (x = 400 / 640) ---------- */}
