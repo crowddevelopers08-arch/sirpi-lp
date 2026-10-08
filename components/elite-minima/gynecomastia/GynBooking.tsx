@@ -8,7 +8,7 @@ import GynLeadForm from "./GynLeadForm"
 import { GYN_BRANCH } from "./content"
 
 const ASSURANCES = [
-  { icon: UserRound, text: "Evaluated by Dr. Madan K" },
+  { icon: UserRound, text: "Evaluated by Dr. Srigireesh A R" },
   { icon: CalendarClock, text: "Callbacks within clinic hours" },
   { icon: ShieldCheck, text: "Private consultation" },
 ] as const
@@ -29,7 +29,7 @@ export default function GynBooking() {
           <p className="g-eyebrow g-eyebrow--ink">Book</p>
           <h2 className="mt-5 max-w-[14ch]">Start with a specialist evaluation</h2>
           <p className="mt-5 max-w-[46ch] text-[0.95rem] leading-relaxed text-[var(--g-dim)]">
-            Share your details and our team will call you back to confirm a consultation slot with Dr. Madan K.
+            Share your details and our team will call you back to confirm a consultation slot with Dr. Srigireesh A R.
           </p>
 
           <ul className="mt-8 space-y-3.5">

@@ -55,7 +55,7 @@ const stats = [
 ]
 
 // const trust = [
-//   { icon: UserRound, label: "Evaluated by\nDr. Madan K" },
+//   { icon: UserRound, label: "Evaluated by\nDr. Srigireesh A R" },
 //   { icon: CalendarClock, label: "Callbacks within\nclinic hours" },
 //   { icon: ShieldCheck, label: "Private\nconsultation" },
 // ]

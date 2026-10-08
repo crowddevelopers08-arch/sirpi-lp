@@ -11,7 +11,7 @@ import { GYN_BRANCH } from "./content"
 const NEXT_STEPS = [
   { icon: PhoneCall, title: "We call you back", body: "Our coordinator rings the number you shared, inside your preferred call window." },
   { icon: CalendarCheck, title: "We confirm your slot", body: "You pick a consultation time that suits you, and we hold it." },
-  { icon: Stethoscope, title: "You meet Dr. Madan K", body: "A private chest evaluation, then a treatment plan built around your case." },
+  { icon: Stethoscope, title: "You meet Dr. Srigireesh A R", body: "A private chest evaluation, then a treatment plan built around your case." },
 ] as const
 
 /**
@@ -36,7 +36,7 @@ export default function GynThankYou() {
         <h1 className="mt-5 text-[clamp(2rem,1.4rem+2.6vw,3.2rem)]">Thank You</h1>
         <p className="mt-5 max-w-[58ch] text-[0.98rem] leading-relaxed text-[var(--g-dim)]">
           Your consultation request is with our team. We&apos;ll call you shortly on the number you shared, during your preferred call time,
-          to confirm your slot with Dr. Madan K.
+          to confirm your slot with Dr. Srigireesh A R.
         </p>
 
         <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

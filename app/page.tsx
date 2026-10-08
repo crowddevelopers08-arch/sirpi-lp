@@ -21,7 +21,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Gynecomastia Surgery in Chennai | Male Breast Reduction — Sirpi Aesthetics, Anna Nagar",
   description:
-    "Gynecomastia treatment in Anna Nagar, Chennai. Specialist evaluation with Dr. Madan K — liposuction, gland excision and chest contouring for a flatter, more masculine chest. Book a private consultation.",
+    "Gynecomastia treatment in Anna Nagar, Chennai. Specialist evaluation with Dr. Srigireesh A R — liposuction, gland excision and chest contouring for a flatter, more masculine chest. Book a private consultation.",
   openGraph: {
     title: "Gynecomastia Surgery in Chennai | Male Breast Reduction — Sirpi Aesthetics",
     description:

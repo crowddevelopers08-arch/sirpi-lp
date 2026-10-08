@@ -64,7 +64,7 @@ export const HERO_MEDIA: { video: string; slides: GynHeroSlide[] } = {
  *  cropped square from the top, which frames a forehead. Cloudinary does the
  *  resize instead, at 2× for retina, with the crop held on the face. */
 export const HERO_SURGEON = {
-  name: "Dr. Madan K",
+  name: "Dr. Srigireesh A R",
   title: "Aesthetic, Plastic & Reconstructive Surgeon",
   photo: cldTransform(IMAGES.drMadan, "c_fill,g_face,w_224,h_224,q_auto"),
 } as const
@@ -264,11 +264,11 @@ export const RECOVERY_MARKS = [
 /* ── Surgeon ─────────────────────────────────────────────────────────────── */
 
 export const SURGEON = {
-  name: "Dr. Madan K",
+  name: "Dr. Srigireesh A R",
   title: "Aesthetic, Plastic & Reconstructive Surgeon",
   qualifications: "M.S. (General Surgery), M.Ch (Plastic Surgery), FIAGES, FIAAPS",
   body: [
-    "Dr. Madan K specializes in aesthetic and reconstructive procedures, including gynecomastia correction, liposuction, and body contouring.",
+    "Dr. Srigireesh A R specializes in aesthetic and reconstructive procedures, including gynecomastia correction, liposuction, and body contouring.",
     "His approach focuses on understanding each patient's anatomy and expectations before creating an individualized surgical plan designed around chest proportion, symmetry, safety, and natural-looking results.",
   ],
   reasons: [
@@ -279,7 +279,7 @@ export const SURGEON = {
     "Pre-operative and post-operative guidance",
   ],
   photo: IMAGES.drMadan,
-  cta: "Consult Dr. Madan K",
+  cta: "Consult Dr. Srigireesh A R",
 } as const
 
 /* ── Clinic ──────────────────────────────────────────────────────────────── */
