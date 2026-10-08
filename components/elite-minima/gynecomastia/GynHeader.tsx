@@ -22,9 +22,6 @@ const NAV = [
  * a gutter — the two systems are not meant to be mistaken for each other. The
  * active section is marked by a rule under the label rather than a sliding
  * pill, for the same reason.
- *
- * The logo is printed in dark ink for white paper, so on this ground it sits on
- * its own white plate rather than being knocked out.
  */
 export default function GynHeader() {
   const [active, setActive] = useState("")
@@ -68,12 +65,21 @@ export default function GynHeader() {
   }, [])
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--g-line)] bg-[rgba(106,17,61,0.92)] backdrop-blur-[10px]">
+    <header className="sticky top-0 z-50 border-b border-[var(--g-line)] bg-[#6A113D]">
       <div className="mx-auto flex h-16 w-full max-w-[1320px] items-center justify-between gap-4 px-5 sm:px-8">
         <a href="#top" className="flex flex-none items-center" aria-label={`${BRAND_FULL} — top of page`}>
-          <span className="flex items-center bg-white px-1 py-1">
-            <Image src="/CIRCLE-STICKER-LOGO.png" alt={BRAND_FULL} width={776} height={180} priority className="h-7 w-32 sm:h-10" />
-          </span>
+          {/* The Sirpi logo is printed white on its own burgundy ground — the same
+              colour as this bar — so it sits straight on it, no plate. Height
+              only, so it keeps its 1029×402 shape instead of being stretched. */}
+          <Image
+            src="/CIRCLE-STICKER-LOGO.png"
+            alt={BRAND_FULL}
+            width={1029}
+            height={402}
+            priority
+            className="h-11 w-auto sm:h-12"
+          />
+
         </a>
 
         <nav className="hidden items-center gap-7 lg:flex">
