@@ -6,20 +6,20 @@ export const BRANCH = "Sirpi Aesthetics, Coimbatore"
 
 /** Primary line — the only number shown in the navbar, and the tel: target for
     single-button call CTAs. */
-export const PHONE_DISPLAY = "+91 89259 76636"
-export const PHONE_TEL = "+918925976636"
+export const PHONE_DISPLAY = "+91 87780 73927"
+export const PHONE_TEL = "+918778073927"
 
 /** Second line — listed beside the primary everywhere except the navbar. */
-export const PHONE_ALT_DISPLAY = "+91 89259 76636"
-export const PHONE_ALT_TEL = "+918925976636"
+export const PHONE_ALT_DISPLAY = "+91 87780 73927"
+export const PHONE_ALT_TEL = "+918778073927"
 
 /** Both lines in display order, for the places that list them together. */
 export const PHONES = [
   { display: PHONE_DISPLAY, tel: PHONE_TEL },
 ] as const
 
-export const WHATSAPP_DISPLAY = "+91 89259 76636"
-export const WHATSAPP_URL = "https://wa.me/918925976636"
+export const WHATSAPP_DISPLAY = "+91 87780 73927"
+export const WHATSAPP_URL = "https://wa.me/918778073927"
 
 export const EMAIL = "sirpiaesthetics@gmail.com"
 

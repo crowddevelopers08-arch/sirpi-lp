@@ -51,7 +51,7 @@ const SLATE = "#78465D"
 const CONV_BG = "#F9E8EF"
 const MINI_BG = "#FFF8FA"
 const MUTED = "#525252"
-const PHONE = "+91 89259 76636"
+const PHONE = "+91 87780 73927"
 
 const rows = [
   { icon: Pipette, feature: "Incision Size", conventional: "Around 4–6 cm", mini: "Around 1–2 cm" },

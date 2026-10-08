@@ -62,7 +62,7 @@ const stats = [
 
 const benefits = ["Minimal Scars", "Quick Recovery", "Improved Confidence"]
 
-const PHONE = "+91 89259 76636"
+const PHONE = "+91 87780 73927"
 
 /* Soft mint blobs that sit behind everything. */
 function Blobs() {

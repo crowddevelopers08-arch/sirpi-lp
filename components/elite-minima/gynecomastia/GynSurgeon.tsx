@@ -90,7 +90,12 @@ export default function GynSurgeon() {
             {/* Name plate under the frame, printed on ink so the portrait has a
                 foot to stand on. */}
             <div className="bg-[var(--g-ink)] px-6 py-5">
-              <p className="g-display text-[1.3rem] leading-none text-[var(--g-bone)]">{SURGEON.name}</p>
+              {/* Inline colour: `.gyn .g-display` sets `color: inherit` as unlayered
+                  CSS, which outranks the Tailwind class and printed the name black
+                  on this black plate. */}
+              <p className="g-display text-[1.3rem] leading-none" style={{ color: "var(--g-bone)" }}>
+                {SURGEON.name}
+              </p>
               <p className="mt-2 text-[0.78rem] uppercase tracking-[0.14em] text-[var(--g-text)]">{SURGEON.title}</p>
             </div>
           </Reveal>
