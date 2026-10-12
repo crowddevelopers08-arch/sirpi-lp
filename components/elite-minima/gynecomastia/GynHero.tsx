@@ -1,8 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { Timer, Users, Star, UserRound, CalendarClock, ShieldCheck, Check, Phone, ArrowRight, ChevronRight } from "lucide-react"
-import CountUp from "../CountUp"
+import { Timer, Landmark, Award, UserRound, CalendarClock, ShieldCheck, Check, Phone, ArrowRight, ChevronRight } from "lucide-react"
 
 /**
  * Gynecomastia Surgery clinic banner — responsive replica.
@@ -48,10 +47,12 @@ const TEAL = "#525252"
 const PURPLE = "#A52D5B"
 const BG = "#FFF8FA"
 
+/* Credentials rather than counts, so the value is text and the label carries
+   the detail. Line breaks are placed so no line runs past its column. */
 const stats = [
-  { icon: Timer, value: 60, suffix: " Minutes", separator: "", label: "SURGERY" },
-  { icon: Users, value: 500, suffix: "+", separator: ",", label: "SURGERIES\nDONE" },
-  { icon: Star, value: 15, suffix: "+", separator: "", label: "YEARS OF\nEXPERIENCE" },
+  { icon: Timer, value: "60–120 Mins", label: "SURGERY\nDURATION" },
+  { icon: Landmark, value: "CEA", label: "GOVT APPROVED\nCENTRE" },
+  { icon: Award, value: "Board Certified", label: "PLASTIC SURGEON WITH\nCOSMETIC SURGERY\nEXPERIENCE" },
 ]
 
 // const trust = [
@@ -60,9 +61,13 @@ const stats = [
 //   { icon: ShieldCheck, label: "Private\nconsultation" },
 // ]
 
-const benefits = ["Minimal Scars", "Quick Recovery", "Improved Confidence"]
+const benefits = ["Minimal Scars", "Quick Recovery", "Daycare Surgery"]
 
 const PHONE = "+91 87780 73927"
+
+/** Statutory registration, shown under the hero actions on every layout. */
+const CEA_LABEL = "Clinical Establishment Act Registration Number"
+const CEA_NUMBER = "CMBEALL20240036607"
 
 /* Soft mint blobs that sit behind everything. */
 function Blobs() {
@@ -153,29 +158,44 @@ export default function GynecomastiaBanner() {
           </div>
 
           {/* stats */}
-          <div className="mt-8 grid grid-cols-3 gap-2">
+          <div className="mt-8 grid grid-cols-1 gap-4 min-[370px]:grid-cols-3 min-[370px]:gap-2">
             {stats.map((s, i) => (
               <div
                 key={s.label}
-                className={`flex flex-col items-center text-center ${i > 0 ? "border-l border-[#E8C5D3]" : ""}`}
+                // Below 370px: icon on the left, value + label beside it.
+                // From 370px: the stacked, centred column.
+                className={`flex flex-row items-center gap-4 text-left min-[370px]:flex-col min-[370px]:gap-0 min-[370px]:text-center ${i > 0 ? "border-t border-[#E8C5D3] pt-4 min-[370px]:border-l min-[370px]:border-t-0 min-[370px]:pt-0" : ""}`}
               >
                 <span
-                  className="flex h-[52px] w-[52px] items-center justify-center rounded-full sm:h-[64px] sm:w-[64px]"
+                  className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full sm:h-[64px] sm:w-[64px]"
                   style={{ backgroundColor: TEAL }}
                 >
                   <s.icon className="h-[24px] w-[24px] text-white sm:h-[30px] sm:w-[30px]" strokeWidth={2} />
                 </span>
-                <span className="mt-2 text-[17px] font-bold sm:text-[22px]" style={{ color: "#000000" }}>
-                  <CountUp end={s.value} suffix={s.suffix} separator={s.separator} />
-                </span>
-                <span
-                  className="mt-1 whitespace-pre-line text-[9px] font-bold uppercase leading-tight tracking-[0.12em] sm:text-[11px]"
-                  style={{ color: "#000000" }}
-                >
-                  {s.label}
-                </span>
+                <div className="flex min-w-0 flex-col min-[370px]:items-center">
+                  <span className="text-[17px] font-bold leading-tight min-[370px]:mt-2 min-[370px]:text-[15px] sm:text-[20px]" style={{ color: "#000000" }}>
+                    {s.value}
+                  </span>
+                  <span
+                    className="mt-1 text-[10px] font-bold uppercase leading-tight tracking-[0.06em] min-[370px]:whitespace-pre-line min-[370px]:text-[9px] sm:text-[11px] sm:tracking-[0.1em]"
+                    style={{ color: "#000000" }}
+                  >
+                    {s.label}
+                  </span>
+                </div>
               </div>
             ))}
+          </div>
+
+          {/* registration — straight after the stats on mobile */}
+          <div className="mt-6 flex items-start gap-2.5 rounded-xl border border-[#E8C5D3] bg-white/80 px-4 py-3">
+            <ShieldCheck className="mt-0.5 h-[18px] w-[18px] shrink-0" style={{ color: GREEN }} strokeWidth={2} aria-hidden />
+            <p className="text-[12px] leading-snug" style={{ color: "#525252" }}>
+              {CEA_LABEL}
+              <span className="mt-0.5 block text-[14px] font-bold tracking-[0.04em]" style={{ color: "#000000" }}>
+                {CEA_NUMBER}
+              </span>
+            </p>
           </div>
 
           {/* trust row — first two side by side, the third centred on its own
@@ -212,7 +232,7 @@ export default function GynecomastiaBanner() {
               </div>
             ))}
           </div>
-
+            
           {/* buttons — moved to the end on mobile so the persuasion (stats,
               before/after, benefits) reads before the ask. */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -238,6 +258,8 @@ export default function GynecomastiaBanner() {
               </span>
             </a>
           </div>
+
+
         </div>
       </div>
 
@@ -310,11 +332,11 @@ export default function GynecomastiaBanner() {
                 style={{
                   left: `${centerLeft}cqw`,
                   top: "46.02%",
-                  fontSize: "min(1.75cqw, 38px)",
+                  fontSize: "min(1.45cqw, 32px)",
                   color: "#000000",
                 }}
               >
-                <CountUp end={s.value} suffix={s.suffix} separator={s.separator} />
+                {s.value}
               </span>
 
               <span
@@ -322,9 +344,9 @@ export default function GynecomastiaBanner() {
                 style={{
                   left: `${centerLeft}cqw`,
                   top: "51.97%",
-                  fontSize: "min(0.8cqw, 17px)",
-                  lineHeight: 1.55,
-                  letterSpacing: "0.14em",
+                  fontSize: "min(0.74cqw, 16px)",
+                  lineHeight: 1.5,
+                  letterSpacing: "0.08em",
                   color: "#000000",
                 }}
               >
@@ -357,8 +379,8 @@ export default function GynecomastiaBanner() {
 
         {/* ---------- desktop actions ---------- */}
         <div
-          className="absolute z-10 flex items-stretch"
-          style={{ left: "10.67%", top: "64.02%", width: "36.23%", height: "8.14%", gap: "1.06cqw" }}
+          className="absolute z-10 flex items-stretch mt-3"
+          style={{ left: "10.67%", top: "72%", width: "36.23%", height: "8.14%", gap: "1.06cqw" }}
         >
           <a
             href="#book"
@@ -384,6 +406,25 @@ export default function GynecomastiaBanner() {
               {PHONE}
             </span>
           </a>
+        </div>
+
+        {/* ---------- registration (above the actions, same left edge) ---------- */}
+        <div
+          className="absolute z-10 flex items-center rounded-lg border border-[#E8C5D3] bg-white/80"
+          style={{ left: "10.67%", top: "63.5%", gap: "0.6cqw", padding: "0.55cqw 1cqw" }}
+        >
+          <ShieldCheck
+            className="shrink-0"
+            style={{ width: "1.25cqw", height: "1.25cqw", color: GREEN }}
+            strokeWidth={2}
+            aria-hidden
+          />
+          <p className="whitespace-nowrap leading-none" style={{ fontSize: "min(0.82cqw, 16px)", color: "#525252" }}>
+            {CEA_LABEL}:{" "}
+            <span className="font-bold tracking-[0.04em]" style={{ color: "#000000" }}>
+              {CEA_NUMBER}
+            </span>
+          </p>
         </div>
 
         {/* ---------- before photo panel (946,75 -> 1303,590) ---------- */}

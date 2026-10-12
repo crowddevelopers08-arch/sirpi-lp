@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useId, useState } from "react"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { ArrowRight, BadgeCheck, ChevronDown } from "lucide-react"
 import { Reveal, Stagger, StaggerItem } from "../motion"
 import { track } from "../track"
 import { GYN_BRANCH, SURGEON } from "./content"
@@ -65,6 +65,18 @@ export default function GynSurgeon() {
               <p className="mt-4 text-[0.86rem] font-bold uppercase tracking-[0.16em] text-[var(--g-ink-dim)]">
                 <strong>MBBS | MS (General Surgery) | MCh &amp; DrNB (Plastic Surgery) | Fellowship in Aesthetic Surgery &amp; Aesthetic Medicine</strong>
               </p>
+
+              {/* Medical council registration — set apart from the degrees as a
+                  verifiable credential: burgundy rule, blush ground, bold number. */}
+              <div className="mt-6 inline-flex max-w-full items-center gap-3 border-l-4 border-[var(--g-accent-deep)] bg-[var(--g-bone-2)] py-3 pl-4 pr-5">
+                <BadgeCheck aria-hidden className="h-6 w-6 flex-none" style={{ color: "var(--g-accent-deep)" }} strokeWidth={2} />
+                <p className="min-w-0 text-[0.86rem] leading-snug text-[var(--g-ink-dim)]">
+                  Tamil Nadu Medical Council Registration No:{" "}
+                  <span className="whitespace-nowrap text-[1rem] font-bold tracking-[0.06em]" style={{ color: "var(--g-accent-deep)" }}>
+                    106297
+                  </span>
+                </p>
+              </div>
             </Reveal>
           </div>
 

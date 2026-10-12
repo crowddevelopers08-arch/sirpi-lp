@@ -197,8 +197,16 @@ export interface GynOption {
    not show. */
 const GLAND: GynImage = { src: IMAGES.glandExcision, alt: "Gland excision for gynecomastia correction" }
 const LIPO_ONE: GynImage = {
-  src: "https://res.cloudinary.com/xykwtyr0/image/upload/v1789818739/common-image.jpg",
+  src: "/front2-13.jpg",
   alt: "Liposuction planning markings drawn on the flank",
+}
+const GLAND_MARKING: GynImage = {
+  src: "/option-1.jpg",
+  alt: "Incision markings around the areola for glandular tissue excision",
+}
+const SKIN_TIGHTENING: GynImage = {
+  src: "/option-2.jpg",
+  alt: "Before and after skin tightening of the abdomen at Sirpi Aesthetics",
 }
 const CONTOUR_BODY: GynImage = {
   src: "https://res.cloudinary.com/xykwtyr0/image/upload/v1789818739/common-image.jpg",
@@ -218,7 +226,7 @@ export const OPTIONS: GynOption[] = [
     name: "Glandular Tissue Excision",
     category: "Gland Removal",
     desc: "When firm glandular tissue is present, surgical removal may be required as part of the correction.",
-    images: [LIPO_ONE],
+    images: [GLAND_MARKING],
   },
   {
     id: "contouring",
@@ -226,6 +234,13 @@ export const OPTIONS: GynOption[] = [
     category: "Chest Shaping",
     desc: "Some patients may require both removal of excess fat and glandular tissue to achieve an appropriate chest contour.",
     images: [CONTOUR_BODY],
+  },
+  {
+    id: "Bodytite",
+    name: "Body Contouring & Skin Tightening ",
+    category: "Bodytite",
+    desc: "BodyTite is an advanced body contouring treatment that reduces stubborn fat and tightens loose skin for a firmer, sculpted look.",
+    images: [SKIN_TIGHTENING],
   },
 ]
 
