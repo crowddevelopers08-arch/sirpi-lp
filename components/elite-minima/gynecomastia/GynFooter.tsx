@@ -38,12 +38,10 @@ export default function GynFooter() {
 
         <div className="grid gap-8 py-9 sm:gap-10 sm:py-12 lg:grid-cols-[1.5fr_1fr_1.3fr] lg:gap-16">
           <div className="max-w-[38ch]">
-            {/* Printed for white paper — on this ground it keeps its own plate
-                rather than being knocked out. */}
-            <span className="inline-flex bg-white px-4 py-3">
-              <Image src="/CIRCLE-STICKER-LOGO.png" alt={BRAND_FULL} width={776} height={180} className="h-9 w-auto sm:h-10" />
-            </span>
-            <p className="g-display mt-5 text-[1rem] tracking-[0.06em] text-[var(--g-text)]">Aesthetic, Plastic &amp; Reconstructive Care</p>
+            {/* The logo carries its own burgundy ground, so it sits straight on
+                the footer — no white plate. Height only, so it keeps its shape. */}
+            <Image src="/CIRCLE-STICKER-LOGO.png" alt={BRAND_FULL} width={1029} height={402} className="h-16 w-auto sm:h-20" />
+            <p className="g-display mt-5 text-[1rem] tracking-[0.06em] text-[var(--g-text)]">Sirpi Aesthetics - Cosmetic Surgery Centre.</p>
             <p className="mt-2 text-[0.9rem]">{ADDRESS_SHORT}</p>
 
             <div className="mt-6 flex gap-2.5">

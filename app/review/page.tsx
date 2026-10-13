@@ -16,7 +16,7 @@ const LOGO_SRC =
 // in components/ContactMapSection.tsx). Replace with the short
 // https://g.page/r/<id>/review link from Google Business Profile when available.
 const GOOGLE_REVIEW_URL =
-  'https://g.page/r/<id>/review';
+  'https://g.page/r/CfKRHNRyPMU3EBM/review';
 
 function wordCount(str: string) {
   return str.trim().split(/\s+/).filter(Boolean).length;
