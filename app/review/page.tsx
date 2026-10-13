@@ -12,7 +12,7 @@ const EMOJIS = ['😞', '😟', '😐', '😊', '🤩'];
 const LOGO_SRC =
   '/CIRCLE-STICKER-LOGO.png';
 
-// Carewell Clinic and Acadamy — Google Business listing (CID from the map embed
+// Carewell Clinic and  — Google Business listing (CID from the map embed
 // in components/ContactMapSection.tsx). Replace with the short
 // https://g.page/r/<id>/review link from Google Business Profile when available.
 const GOOGLE_REVIEW_URL =
