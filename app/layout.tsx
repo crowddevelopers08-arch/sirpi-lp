@@ -26,7 +26,7 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   // Needed so the OG/Twitter images resolve to absolute URLs. Override per
   // environment with NEXT_PUBLIC_SITE_URL.
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://eliteminima.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://treatment.sirpicentre.com/"),
   title: TITLE,
   description: DESCRIPTION,
   applicationName: "Sirpi Aesthetics",
@@ -53,7 +53,65 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`antialiased ${lato.variable}`}>
+      <head>
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WKPJD9FP');`,
+          }}
+        />
+        {/* End Google Tag Manager */}
+
+        {/* Google tag (gtag.js) — Google Ads AW-11106084367.
+            Conversions are fired from code, not from here:
+              • Click to call  → components/elite-minima/track.ts (every call_click)
+              • Lead / thank-you page → components/elite-minima/ThankYouPanel.tsx
+            If GTM-WKPJD9FP is ever given these same Ads conversion tags, remove
+            them from one side or each conversion will be counted twice. */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11106084367" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'AW-11106084367');
+
+// Click-to-call conversion, verbatim from the Ads UI, for inline onclick use.
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-11106084367/rmZ3CNCfzJ0dEI_M5a8p',
+      'value': 1.0,
+      'currency': 'INR',
+      'event_callback': callback
+  });
+  return false;
+}
+window.gtag = gtag;
+window.gtag_report_conversion = gtag_report_conversion;`,
+          }}
+        />
+        {/* End Google tag (gtag.js) */}
+      </head>
       <body>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-WKPJD9FP"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         {children}
       </body>
     </html>

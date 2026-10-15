@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { CheckCircle2, Phone, PhoneCall, CalendarCheck, Stethoscope } from "lucide-react"
 import { FaWhatsapp } from "react-icons/fa"
-import { track } from "./track"
+import { ADS_CONVERSIONS, adsConversion, track } from "./track"
 import { WHATSAPP_URL } from "./config"
 
 /** What actually happens next, so the wait after submitting feels accounted for. */
@@ -36,6 +36,10 @@ export default function ThankYouPanel({ phones, branch }: ThankYouPanelProps) {
   /* Same dataLayer push as before, through the helper that owns the window
      typing — and, being neither lead_submit nor a click, still no Pixel event. */
   useEffect(() => track("lead_thank_you", { branch }), [branch])
+
+  // Google Ads "Gyneacomastia LP conversion page" — fires once when the
+  // thank-you page loads, exactly like Google's page snippet.
+  useEffect(() => adsConversion(ADS_CONVERSIONS.lead), [])
 
   return (
     <div className="relative z-10 w-full max-w-[680px]">

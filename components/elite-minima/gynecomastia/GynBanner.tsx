@@ -12,6 +12,7 @@ import {
   Phone,
   Check,
 } from "lucide-react"
+import { track } from "../track"
 
 /**
  * "Why Choose a Minimally Invasive Approach?" comparison table — responsive replica.
@@ -256,6 +257,7 @@ export default function ComparisonBanner() {
         <div className="mt-8 flex justify-center">
           <a
             href={`tel:${PHONE.replace(/\s/g, "")}`}
+            onClick={() => track("call_click", { section: "banner" })}
             className="flex items-center gap-3 rounded-md px-7 py-3.5 text-white shadow-lg transition hover:brightness-110 sm:px-9 sm:py-4"
             style={{ backgroundColor: GREEN }}
           >

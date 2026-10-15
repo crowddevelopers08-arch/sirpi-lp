@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { Timer, Landmark, Award, UserRound, CalendarClock, ShieldCheck, Check, Phone, ArrowRight, ChevronRight } from "lucide-react"
+import { track } from "../track"
 
 /**
  * Gynecomastia Surgery clinic banner — responsive replica.
@@ -247,6 +248,7 @@ export default function GynecomastiaBanner() {
 
             <a
               href={`tel:${PHONE.replace(/\s/g, "")}`}
+              onClick={() => track("call_click", { section: "hero" })}
               className="flex items-center justify-center gap-3 rounded-md border-2 bg-white px-6 py-2"
               style={{ borderColor: GREEN }}
             >
@@ -393,6 +395,7 @@ export default function GynecomastiaBanner() {
 
           <a
             href={`tel:${PHONE.replace(/\s/g, "")}`}
+              onClick={() => track("call_click", { section: "hero" })}
             className="flex min-w-0 flex-1 items-center justify-center whitespace-nowrap rounded-md bg-white"
             style={{ gap: "0.7cqw", border: `2px solid ${GREEN}` }}
           >

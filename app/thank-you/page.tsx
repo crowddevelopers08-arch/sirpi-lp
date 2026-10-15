@@ -1,5 +1,4 @@
 import Header from "@/components/elite-minima/Header"
-import Footer from "@/components/elite-minima/Footer"
 import ThankYouPanel from "@/components/elite-minima/ThankYouPanel"
 import { PHONES } from "@/components/elite-minima/config"
 

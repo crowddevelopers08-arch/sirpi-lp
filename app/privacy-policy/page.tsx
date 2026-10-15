@@ -4,6 +4,7 @@ import React from "react"
 import { Phone, Shield, Lock, Eye, MapPin, Mail, Check } from "lucide-react"
 import Header from "@/components/elite-minima/Header"
 import Footer from "@/components/elite-minima/Footer"
+import { track } from "@/components/elite-minima/track"
 import { BRAND, ADDRESS_FULL, EMAIL, PHONES } from "@/components/elite-minima/config"
 
 const COLLECTED = [
@@ -145,7 +146,7 @@ const PrivacyPolicy: React.FC = () => {
                     <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-[var(--e-green)] text-white">
                       <Phone className="h-4 w-4" />
                     </span>
-                    <a href={`tel:${p.tel}`} className="font-semibold text-[var(--e-ink)] hover:text-[var(--e-green-deep)]">
+                    <a href={`tel:${p.tel}`} onClick={() => track("call_click", { section: "privacy-policy" })} className="font-semibold text-[var(--e-ink)] hover:text-[var(--e-green-deep)]">
                       {p.display}
                     </a>
                   </li>
