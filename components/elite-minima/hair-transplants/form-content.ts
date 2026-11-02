@@ -142,10 +142,6 @@ export const MESSAGE_CLOSE = "Would you like to discuss this with our expert? �
 export const EXIT_MESSAGE =
   "If you’re not comfortable with the clinic location in Coimbatore, you may exit the form and choose not to proceed further."
 
-/** Source labels — the sheet's Source column and TeleCRM's "Form Name" note. */
-export const LEAD_SOURCE = "Hair Transplant Lead Form"
-export const LEAD_SOURCE_OUTSTATION = "Hair Transplant – Outstation (Not Ready to Travel, Interested)"
-
 /** Call-back windows inside clinic hours (Mon–Sat, 10 AM – 7 PM). */
 export const CALL_SLOTS = [
   "10:00 AM – 11:00 AM",

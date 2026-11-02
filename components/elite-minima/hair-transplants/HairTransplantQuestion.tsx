@@ -13,8 +13,6 @@ import {
   CALL_SLOTS,
   CANNOT_TRAVEL,
   EXIT_MESSAGE,
-  LEAD_SOURCE,
-  LEAD_SOURCE_OUTSTATION,
   MESSAGE_CLOSE,
   NOT_INTERESTED,
   QUESTIONS,
@@ -149,7 +147,6 @@ export default function HairTransplantQuestion() {
   }
 
   const setField = (field: keyof typeof contact, value: string) => setContact((c) => ({ ...c, [field]: value }));
-  const pick = (id: QuestionId) => QUESTIONS[id].options[answers[id]];
 
   function handleContact(event: FormEvent) {
     event.preventDefault();
@@ -165,6 +162,56 @@ export default function HairTransplantQuestion() {
     go("schedule");
   }
 
+  /**
+   * Saved to the Postgres database and sent on to TeleCRM by
+   * app/hair-transplant/api/leads (lib/leads.ts), which re-checks every answer
+   * against the same option lists before storing it. Returns "" on success,
+   * otherwise the message to show.
+   */
+  function postLead(): Promise<string> {
+    return fetch("/hair-transplant/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: contact.name.trim(),
+        phone: contact.phone.replace(/\D/g, "").slice(-10),
+        city: contact.city.trim(),
+        answers,
+        callDate: contact.date,
+        callSlot: contact.slot,
+        pageUrl: window.location.href,
+      }),
+    }).then(
+      async (response) => {
+        const data = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+        return response.ok && data?.ok ? "" : data?.error ?? "Something went wrong. Please try again or call us.";
+      },
+      () => "Network error. Please check your connection and try again.",
+    );
+  }
+
+  /** "No, I am not interested" — the exit screen still takes a name and number. */
+  async function handleExit(event: FormEvent) {
+    event.preventDefault();
+    if (saving) return;
+    if (!/^[6-9]\d{9}$/.test(contact.phone.replace(/\D/g, "").slice(-10))) {
+      setFieldError("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+    setFieldError("");
+    setSaving(true);
+    setSaveError("");
+    const error = await postLead();
+    setSaving(false);
+    if (error) {
+      setSaveError(error);
+      return;
+    }
+    track("lead_submit", { branch: "Sirpi Aesthetics — Hair Transplant", notInterested: true });
+    setVariant("closed");
+    go("thankyou");
+  }
+
   async function handleSchedule(event: FormEvent) {
     event.preventDefault();
     if (saving) return;
@@ -176,38 +223,7 @@ export default function HairTransplantQuestion() {
     setSaving(true);
     setSaveError("");
 
-    // Every answer rides the API's `concern` field, which is the sheet's
-    // Concern column and the TeleCRM "Condition" note.
-    const parts = [
-      `Hair loss: ${pick("concern")}`,
-      `Budget: ${pick("budget")}`,
-      `Travel to Coimbatore: ${pick("travel")}`,
-      ...(cannotTravel
-        ? [`Reason: ${pick("travelReason")}`, `Would consider travelling: ${pick("travelConsider")}`, `Wants information: ${pick("travelInfo")}`]
-        : []),
-      `Considering for: ${pick("considering")}`,
-      `Stopping them: ${pick("barrier")}`,
-      `Preferred call: ${contact.date || "Any day"}, ${contact.slot || "Any time"}`,
-    ];
-
-    const error = await fetch("/api/submissions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        source: outstation ? LEAD_SOURCE_OUTSTATION : LEAD_SOURCE,
-        name: contact.name.trim(),
-        phone: contact.phone.replace(/\D/g, "").slice(-10),
-        city: contact.city.trim(),
-        concern: parts.join(" | "),
-        pageUrl: window.location.href,
-      }),
-    }).then(
-      async (response) => {
-        const data = (await response.json().catch(() => null)) as { success?: boolean; error?: string } | null;
-        return response.ok && data?.success ? "" : data?.error ?? "Something went wrong. Please try again or call us.";
-      },
-      () => "Network error. Please check your connection and try again.",
-    );
+    const error = await postLead();
 
     setSaving(false);
     if (error) {
@@ -248,14 +264,35 @@ export default function HairTransplantQuestion() {
         <div className="relative max-w-[620px]">
           <span className="absolute top-0 -left-7 font-serif text-[34px] leading-none text-[#6A113D]" aria-hidden="true">&ldquo;</span>
           <p className="reveal-in text-[clamp(18px,2.2vw,32px)] leading-[1.35] tracking-[-.3px]" style={revealDelay(0)}>{EXIT_MESSAGE}</p>
-          <button
-            type="button"
-            onClick={() => { setVariant("closed"); go("thankyou"); }}
-            className="reveal-in mt-[clamp(20px,4svh,36px)] h-[46px] cursor-pointer rounded-lg border-0 bg-[#6A113D] px-6 text-lg font-bold text-white hover:bg-[#571032] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1f0a14]"
-            style={revealDelay(1)}
-          >
-            Submit
-          </button>
+          <form onSubmit={handleExit} className="mt-[clamp(18px,3.5svh,32px)] max-w-[446px]">
+            <p className="reveal-in mb-[clamp(12px,2.4svh,22px)] text-[clamp(13px,min(1.25vw,2.5svh),18px)] leading-[1.45] text-[#1f0a14]/75" style={revealDelay(1)}>
+              Before you go, please leave your name and number in case you&rsquo;d like information later.
+            </p>
+            <div className="flex flex-col gap-[clamp(14px,2.6svh,26px)]">
+              <label className="reveal-in block" style={revealDelay(2)}>
+                <span className={FIELD_LABEL}>Name*</span>
+                <input className={FIELD} type="text" placeholder="Your full name" required autoComplete="name" value={contact.name} onChange={(e) => setField("name", e.target.value)} />
+              </label>
+              <label className="reveal-in block" style={revealDelay(3)}>
+                <span className={FIELD_LABEL}>Phone number*</span>
+                <div className="flex items-center gap-2 border-b border-[#1f0a14]/25 pb-2 focus-within:border-[#6A113D]">
+                  <span className="shrink-0 text-[clamp(14px,1.4vw,19px)] text-[#1f0a14]/70" aria-hidden="true">🇮🇳 +91</span>
+                  <span className="h-4 w-px shrink-0 bg-[#1f0a14]/20" aria-hidden="true" />
+                  <input className="min-w-0 flex-1 border-0 bg-transparent text-[clamp(14px,1.4vw,19px)] text-[#1f0a14] outline-none placeholder:text-[#1f0a14]/36" type="tel" inputMode="numeric" placeholder="98765 43210" required autoComplete="tel-national" value={contact.phone} onChange={(e) => setField("phone", e.target.value)} />
+                </div>
+              </label>
+            </div>
+            {fieldError && <p className="mt-3 text-sm font-medium text-[#6A113D]" role="alert">{fieldError}</p>}
+            <button
+              type="submit"
+              disabled={saving}
+              className="reveal-in mt-[clamp(20px,4svh,36px)] h-[46px] cursor-pointer rounded-lg border-0 bg-[#6A113D] px-6 text-lg font-bold text-white hover:bg-[#571032] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1f0a14] disabled:cursor-wait disabled:opacity-60"
+              style={revealDelay(4)}
+            >
+              {saving ? "Submitting…" : "Submit"}
+            </button>
+            {saveError && <p className="mt-3 text-sm font-medium text-[#6A113D]" role="alert">{saveError}</p>}
+          </form>
         </div>
         {nav}
       </main>

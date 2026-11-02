@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// One row per completed Sirpi Aesthetics hair transplant form
+// (app/hair-transplant). Each answer is stored as the option text the visitor
+// picked, so the dashboard and CSV read without a lookup table.
+model Lead {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  name  String
+  phone String
+  city  String // "" for Not Interested leads (not asked)
+
+  hairLoss   String // Q1 What is your current hair loss concern?
+  budget     String // Q2 Investment range
+  travel     String // Q3 Comfortable travelling to Coimbatore?
+  // Q3a–3c, only when they said they cannot travel
+  travelReason   String?
+  travelConsider String?
+  travelInfo     String?
+  // Q4/Q5 - empty for "Not Interested" leads, who leave the form at 3c
+  considering String? // Q4 How long have you been considering a hair transplant?
+  barrier     String? // Q5 What is currently stopping you?
+
+  callDate String? // Q8 preferred date (YYYY-MM-DD)
+  callSlot String? // Q8 preferred time window
+
+  // false = cannot travel to Coimbatore (the outstation branch)
+  locationComfortable Boolean
+  // "Standard", "Outstation – Not Ready to Travel but Interested" or "Not Interested"
+  category String @default("Standard")
+
+  pageUrl String?
+
+  @@index([createdAt])
+}

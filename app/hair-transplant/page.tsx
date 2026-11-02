@@ -12,7 +12,7 @@ export default function HairTransplantPage() {
   return (
     <>
       {/* Intro sits over the form for the first few seconds, then removes itself. */}
-      <IntroLoader />
+      {/* <IntroLoader /> */}
       <HairTransplantQuestion />
     </>
   );
