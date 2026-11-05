@@ -39,9 +39,9 @@ export const QUESTIONS: Record<QuestionId, Question> = {
     label: "2",
     title: "What investment range are you considering for your hair transplant?",
     options: [
-      "₹75,000–₹1,00,000",
-      "₹1,00,000–₹1,50,000",
-      "₹1,50,000–₹2,00,000",
+      "₹40 / Graft–₹45 / Graft",
+      "₹45 / Graft–₹50 / Graft",
+      "₹50 / Graft",
       "I would like to understand the cost after assessment",
     ],
   },
@@ -135,6 +135,12 @@ export const BARRIER_MESSAGES: readonly (readonly string[])[] = [
     "At Sirpi Aesthetics, Dr. Srigireesh, a certified Plastic Surgeon, can assess your hair loss and discuss the appropriate treatment approach based on your individual case.",
   ],
 ]
+
+/** Shown on every Q5 message screen, highlighted above the closing line. */
+export const DOCTOR_EXPERIENCE = [
+  { value: "5 Years", label: "Experience post MCh Plastic Surgery" },
+  { value: "11 Years", label: "Experience post MBBS" },
+] as const
 
 /** Closes every Q5 message, as in the reference screen. */
 export const MESSAGE_CLOSE = "Would you like to discuss this with our expert? 👉 If not, you may exit the form."

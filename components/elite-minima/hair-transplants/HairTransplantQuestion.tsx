@@ -13,6 +13,7 @@ import {
   CALL_SLOTS,
   CANNOT_TRAVEL,
   EXIT_MESSAGE,
+  DOCTOR_EXPERIENCE,
   MESSAGE_CLOSE,
   NOT_INTERESTED,
   QUESTIONS,
@@ -38,15 +39,22 @@ const QUESTION_IDS = Object.keys(QUESTIONS) as QuestionId[];
 const isQuestion = (phase: Phase): phase is QuestionId => (QUESTION_IDS as string[]).includes(phase);
 
 const clinicGallery = [
-  { src: "/clinic-1.jpg", alt: "Sirpi Aesthetics clinic, Coimbatore" },
-  { src: "/clinic-2.jpg", alt: "Inside Sirpi Aesthetics" },
-  { src: "/clinic-3.jpg", alt: "Consultation area at Sirpi Aesthetics" },
+  { src: "/clini01.jpg", alt: "Sirpi Aesthetics clinic, Coimbatore" },
+  { src: "/hair-treatment-1.jpg", alt: "Dr. Srigireesh performing a hair transplant procedure at Sirpi Aesthetics" },
+  { src: "/hair-treatment-2.jpg", alt: "Dr. Srigireesh treating a patient's scalp during a hair transplant at Sirpi Aesthetics" },
   { src: "/clinic-4.jpg", alt: "Treatment area at Sirpi Aesthetics" },
 ];
+const resultsGallery = [
+  { src: "/HT-PT-3.jpg", alt: "Hair transplant before and after, 3-year result, by Dr. Srigireesh at Sirpi Aesthetics" },
+  { src: "/bfafs-2.png", alt: "Procedure room at Sirpi Aesthetics, Coimbatore" },
+  { src: "/bfafs-3.png", alt: "Hair transplant before and after result by Dr. Srigireesh at Sirpi Aesthetics" },
+  { src: "/HT-RESULTS-2.jpg", alt: "Dr. Srigireesh during a hair transplant procedure at Sirpi Aesthetics" },
+];
 const doctor = { src: "/DSC3351.jpg", alt: "Dr. Srigireesh A R, Plastic Surgeon at Sirpi Aesthetics" };
+const doctorMessage = { src: "/dr-srigireesh-suit.jpg", alt: "Dr. Srigireesh A R, Plastic Surgeon at Sirpi Aesthetics" };
 const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(`Sirpi Aesthetics, ${ADDRESS_FULL}`)}&output=embed`;
 
-type Visual = "gallery" | "doctor" | "map" | "clinic";
+type Visual = "gallery" | "doctor" | "map" | "clinic" | "result";
 const VISUAL: Partial<Record<Phase, Visual>> = {
   concern: "gallery",
   budget: "doctor",
@@ -55,7 +63,7 @@ const VISUAL: Partial<Record<Phase, Visual>> = {
   travelConsider: "map",
   travelInfo: "map",
   considering: "clinic",
-  barrier: "doctor",
+  barrier: "result",
   message: "doctor",
 };
 
@@ -316,7 +324,7 @@ export default function HairTransplantQuestion() {
     ) : visual === "doctor" ? (
       <figure className={`${PANEL} flex aspect-[4/5] max-w-[calc((100svh-164px)*0.8)] flex-col bg-white`} style={revealDelay(8)}>
         <div className="relative min-h-0 flex-1">
-          <Image src={doctor.src} alt={doctor.alt} fill priority className="object-cover object-top" sizes="(max-width: 700px) 82vw, 35vw" />
+          <Image src={phase === "message" ? doctorMessage.src : doctor.src} alt={doctor.alt} fill priority className="object-cover object-top" sizes="(max-width: 700px) 82vw, 35vw" />
         </div>
         <figcaption className="shrink-0 bg-[#6A113D] px-3 py-[clamp(6px,1.4svh,12px)] text-center text-[clamp(11px,1vw,15px)] font-semibold text-white">
           Dr. Srigireesh A R — Certified Plastic Surgeon
@@ -329,9 +337,25 @@ export default function HairTransplantQuestion() {
         </div>
         <iframe className="min-h-0 w-full flex-1 border-0" src={mapUrl} title="Map of Sirpi Aesthetics, Coimbatore" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
       </div>
+    ) : visual === "result" ? (
+      // object-contain: the photo is a side-by-side pair, so neither half may be cropped.
+      <figure className={`${PANEL} m-0 flex aspect-[4/3] max-w-[calc((100svh-164px)*1.33)] flex-col bg-white`} style={revealDelay(8)}>
+        <div className="relative min-h-0 flex-1">
+          <Image src="/bfafs-1.JPG" alt="Hair transplant before and after result at Sirpi Aesthetics" fill priority className="object-contain" sizes="(max-width: 700px) 82vw, 43vw" />
+        </div>
+        <figcaption className="shrink-0 bg-[#6A113D] px-3 py-[clamp(6px,1.4svh,12px)] text-center text-[clamp(11px,1vw,15px)] font-semibold text-white">
+          Before &amp; after — individual results may vary
+        </figcaption>
+      </figure>
     ) : visual === "clinic" ? (
-      <div className={`${PANEL} aspect-[3/2] max-w-[calc((100svh-164px)*1.5)]`} style={revealDelay(8)}>
-        <Image src="/clinic-5.jpg" alt="Sirpi Aesthetics clinic, Coimbatore" fill priority className="object-cover" sizes="(max-width: 700px) 82vw, 43vw" />
+      // Square panel of square cells, at every width, so the before/after cards
+      // keep their "BEFORE / AFTER" labels instead of being cropped.
+      <div className="reveal-in relative grid aspect-square w-full max-w-[calc(100svh-164px)] min-h-0 grid-cols-2 grid-rows-2 gap-2 justify-self-center [@media(max-width:700px)]:max-w-[30svh]" style={revealDelay(8)}>
+        {resultsGallery.map((image) => (
+          <div key={image.src} className="relative min-h-0 min-w-0 overflow-hidden rounded-lg border border-[#1f0a14]/10 bg-white">
+            <Image src={image.src} alt={image.alt} fill priority className="object-cover" sizes="(max-width: 700px) 15svh, 22vw" />
+          </div>
+        ))}
       </div>
     ) : null;
 
@@ -392,9 +416,18 @@ export default function HairTransplantQuestion() {
             {paragraphs.map((paragraph, i) => (
               <p key={i} className="reveal-in" style={revealDelay(i)}>{paragraph}</p>
             ))}
-            <p className="reveal-in font-semibold text-[#1f0a14]" style={revealDelay(paragraphs.length)}>{MESSAGE_CLOSE}</p>
+            {/* The surgeon's experience, set apart from the prose as two figures. */}
+            <div className="reveal-in grid grid-cols-2 gap-2.5" style={revealDelay(paragraphs.length)}>
+              {DOCTOR_EXPERIENCE.map((item) => (
+                <div key={item.label} className="rounded-xl border-l-4 border-[#ED575C] bg-[#6A113D] px-[clamp(10px,1.1vw,16px)] py-[clamp(8px,1.5svh,14px)] text-white">
+                  <p className="text-[clamp(18px,min(1.8vw,3.4svh),28px)] leading-none font-bold tracking-[-.3px]">{item.value}</p>
+                  <p className="mt-1.5 text-[clamp(11px,min(.95vw,1.9svh),14px)] leading-[1.3] font-medium tracking-normal text-white/90">{item.label}</p>
+                </div>
+              ))}
+            </div>
+            <p className="reveal-in font-semibold text-[#1f0a14]" style={revealDelay(paragraphs.length + 1)}>{MESSAGE_CLOSE}</p>
           </div>
-          <button className={BTN} style={revealDelay(paragraphs.length + 1)} type="button" onClick={() => go("contact")}>Continue</button>
+          <button className={BTN} style={revealDelay(paragraphs.length + 2)} type="button" onClick={() => go("contact")}>Continue</button>
         </div>
         {panel}
       </>
@@ -473,7 +506,7 @@ export default function HairTransplantQuestion() {
       <RevealStyles />
         <FloatingBackground />
       <BrandLogo />
-      <div className="grid h-full min-h-0 grid-cols-2 items-center gap-x-[8vw] px-[8vw] pt-[clamp(64px,12svh,100px)] pb-[clamp(44px,7svh,64px)] [@media(max-width:700px)]:grid-cols-1 [@media(max-width:700px)]:grid-rows-[auto_minmax(0,1fr)] [@media(max-width:700px)]:gap-4 [@media(max-width:700px)]:px-[9vw]">
+      <div className="grid h-full min-h-0 grid-cols-2 items-center gap-x-[8vw] overflow-y-auto px-[8vw] pt-[clamp(64px,12svh,100px)] pb-[clamp(44px,7svh,64px)] [@media(max-width:700px)]:grid-cols-1 [@media(max-width:700px)]:grid-rows-[auto_minmax(0,1fr)] [@media(max-width:700px)]:gap-4 [@media(max-width:700px)]:px-[9vw]">
         {body}
       </div>
       {nav}
