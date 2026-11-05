@@ -3,7 +3,9 @@
 import BrandLogo, { RevealStyles } from "./BrandLogo";
 import FloatingBackground from "./FloatingBackground";
 import { revealDelay } from "./reveal";
-import { ADDRESS_SHORT, EMAIL, PHONE_DISPLAY, PHONE_TEL } from "../config";
+import { ADDRESS_FULL, ADDRESS_SHORT, EMAIL, PHONE_DISPLAY, PHONE_TEL } from "../config";
+
+const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(`Sirpi Aesthetics, ${ADDRESS_FULL}`)}&output=embed`;
 
 export type ThankYouVariant = "booked" | "outstation" | "closed";
 
@@ -13,7 +15,7 @@ export default function ThankYouScreen({ name, phone, variant, onHome }: { name:
       <RevealStyles />
         <FloatingBackground />
       <BrandLogo />
-      <div className="max-w-[560px]">
+      <div className="w-full max-w-[560px]">
         <h1 className="reveal-in text-[clamp(28px,4vw,48px)] leading-[1.15] font-bold text-[#6A113D]" style={revealDelay(0)}>
           Thank you{name ? `, ${name}` : ""}!
         </h1>
@@ -34,7 +36,10 @@ export default function ThankYouScreen({ name, phone, variant, onHome }: { name:
         <p className="reveal-in mt-[clamp(24px,4svh,36px)] text-[clamp(13px,1.1vw,16px)] font-semibold text-[#1f0a14]" style={revealDelay(3)}>
           Sirpi Aesthetics — {ADDRESS_SHORT}
         </p>
-        <button type="button" onClick={onHome} className="reveal-in mt-[clamp(20px,3.5svh,32px)] inline-flex h-[46px] cursor-pointer items-center gap-2 rounded-lg border-0 bg-[#6A113D] px-6 text-lg font-bold text-white hover:bg-[#571032] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1f0a14]" style={revealDelay(4)}>
+        <div className="reveal-in mt-[clamp(12px,2svh,18px)] h-[clamp(190px,32svh,300px)] w-full overflow-hidden rounded-xl border border-[#1f0a14]/10 bg-white" style={revealDelay(4)}>
+          <iframe className="h-full w-full border-0" src={mapUrl} title="Map of Sirpi Aesthetics, Peelamedu, Coimbatore" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+        </div>
+        <button type="button" onClick={onHome} className="reveal-in mt-[clamp(20px,3.5svh,32px)] inline-flex h-[46px] cursor-pointer items-center gap-2 rounded-lg border-0 bg-[#6A113D] px-6 text-lg font-bold text-white hover:bg-[#571032] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1f0a14]" style={revealDelay(5)}>
           <svg viewBox="0 0 24 24" className="size-5 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5" /><path d="M5.5 9.5V20h13V9.5" /></svg>
           Back to home
         </button>

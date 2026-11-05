@@ -51,7 +51,6 @@ export const QUESTIONS: Record<QuestionId, Question> = {
     title: "Are you comfortable travelling to Coimbatore for your hair transplant consultation and treatment?",
     options: [
       "Yes, I am from Coimbatore",
-      "Yes, I can travel to Coimbatore",
       "I am nearby and can travel",
       "I cannot travel to Coimbatore for treatment",
     ],
@@ -102,7 +101,7 @@ export const QUESTIONS: Record<QuestionId, Question> = {
 }
 
 /** Option index on "travel" that opens the conditional branch. */
-export const CANNOT_TRAVEL = 3
+export const CANNOT_TRAVEL = 2
 /** Option index on "travelInfo" that ends the form. */
 export const NOT_INTERESTED = 1
 
