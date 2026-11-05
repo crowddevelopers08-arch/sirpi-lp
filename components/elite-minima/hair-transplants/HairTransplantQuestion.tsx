@@ -39,7 +39,7 @@ const QUESTION_IDS = Object.keys(QUESTIONS) as QuestionId[];
 const isQuestion = (phase: Phase): phase is QuestionId => (QUESTION_IDS as string[]).includes(phase);
 
 const clinicGallery = [
-  { src: "/clini01.jpg", alt: "Sirpi Aesthetics clinic, Coimbatore" },
+  { src: "/clini01.JPG", alt: "Sirpi Aesthetics clinic, Coimbatore" },
   { src: "/hair-treatment-1.jpg", alt: "Dr. Srigireesh performing a hair transplant procedure at Sirpi Aesthetics" },
   { src: "/hair-treatment-2.jpg", alt: "Dr. Srigireesh treating a patient's scalp during a hair transplant at Sirpi Aesthetics" },
   { src: "/clinic-4.jpg", alt: "Treatment area at Sirpi Aesthetics" },
