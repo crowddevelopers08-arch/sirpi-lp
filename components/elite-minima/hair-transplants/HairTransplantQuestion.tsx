@@ -324,9 +324,13 @@ export default function HairTransplantQuestion() {
         </div>
       </div>
     ) : visual === "doctor" ? (
-      <figure className={`${PANEL} flex aspect-[4/5] max-w-[calc((100svh-164px)*0.8)] flex-col bg-white`} style={revealDelay(8)}>
-        <div className="relative min-h-0 flex-1">
-          <Image src={phase === "message" ? doctorMessage.src : doctor.src} alt={doctor.alt} fill priority className="object-cover object-top" sizes="(max-width: 700px) 82vw, 35vw" />
+      <figure className={`${PANEL} ${phase === "message" ? "doctor-message-portrait" : ""} flex aspect-[4/5] max-w-[calc((100svh-164px)*0.8)] flex-col bg-white`} style={revealDelay(8)}>
+        <div className="doctor-portrait-image relative min-h-0 flex-1">
+          {phase === "message" ? (
+            <Image src={doctorMessage.src} alt={doctorMessage.alt} width={1067} height={1600} priority className="absolute inset-0 h-full w-full object-cover object-top" sizes="(max-width: 700px) 82vw, 35vw" />
+          ) : (
+            <Image src={doctor.src} alt={doctor.alt} fill priority className="object-cover object-top" sizes="(max-width: 700px) 82vw, 35vw" />
+          )}
         </div>
         <figcaption className="shrink-0 bg-[#6A113D] px-3 py-[clamp(6px,1.4svh,12px)] text-center text-[clamp(11px,1vw,15px)] font-semibold text-white">
           Dr. Srigireesh A R — Certified Plastic Surgeon

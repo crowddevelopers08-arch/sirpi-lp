@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+/* Keep the message portrait visible when the mobile copy fills the screen. */
+@media (max-width: 700px) {
+  div.grid:has(> figure.doctor-message-portrait) {
+    grid-template-rows: auto auto;
+    align-content: start;
+  }
+
+  figure.doctor-message-portrait {
+    height: auto;
+    min-height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    align-self: start;
+  }
+
+  figure.doctor-message-portrait .doctor-portrait-image {
+    flex: none;
+  }
+
+  figure.doctor-message-portrait .doctor-portrait-image img {
+    position: static;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
 /* Advanced GroHair logo palette */
 @theme {
   --color-brand: #e8212b;
