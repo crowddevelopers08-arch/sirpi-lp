@@ -135,11 +135,44 @@ export const BARRIER_MESSAGES: readonly (readonly string[])[] = [
   ],
 ]
 
+/** Shown beside Q2 (investment range), in place of a photo. */
+export const WHY_CHOOSE = {
+  title: "Why Choose Our Hair Transplant Centre?",
+  points: [
+    {
+      title: "Surgeon-Performed Procedure",
+      text: "The surgical procedure is performed by the Cosmetic Surgeon, with no technicians performing the surgery.",
+    },
+    {
+      title: "Registered Clinical Facility",
+      text: "Treatment is carried out at a registered clinic / recognised hospital facility.",
+    },
+    {
+      title: "CSSD Support",
+      text: "Dedicated CSSD facility supporting appropriate sterilisation and infection-control practices.",
+    },
+    {
+      title: "Qualified Medical Supervision",
+      text: "Your procedure is planned and performed under qualified medical supervision.",
+    },
+    {
+      title: "Transparent Clinical Credentials",
+      text: "Clinic registration and doctor's medical registration details are clearly displayed.",
+    },
+  ],
+} as const
+
 /** Shown on every Q5 message screen, highlighted above the closing line. */
 export const DOCTOR_EXPERIENCE = [
   { value: "5 Years", label: "Experience post MCh Plastic Surgery" },
   { value: "11 Years", label: "Experience post MBBS" },
 ] as const
+
+/** Shown under the experience figures on every Q5 message screen. */
+export const CEA_REGISTRATION = {
+  label: "Clinical Establishment Act Registration Number",
+  number: "CMBEALL20240036607",
+} as const
 
 /** Closes every Q5 message, as in the reference screen. */
 export const MESSAGE_CLOSE = "Would you like to discuss this with our expert? 👉 If not, you may exit the form."

@@ -13,7 +13,9 @@ import {
   CALL_SLOTS,
   CANNOT_TRAVEL,
   EXIT_MESSAGE,
+  CEA_REGISTRATION,
   DOCTOR_EXPERIENCE,
+  WHY_CHOOSE,
   MESSAGE_CLOSE,
   NOT_INTERESTED,
   QUESTIONS,
@@ -396,11 +398,30 @@ export default function HairTransplantQuestion() {
               ))}
             </div>
           </fieldset>
-          <button className={BTN} style={revealDelay(1 + question.options.length)} type="submit">OK</button>
+          <button className={question.id === "budget" ? BTN.replace("mt-[clamp(12px,3svh,28px)]", "mt-[clamp(8px,1.8svh,18px)]") : BTN} style={revealDelay(1 + question.options.length)} type="submit">OK</button>
           {question.id === "concern" && (
             <p className="reveal-in mt-[clamp(10px,2svh,18px)] max-w-[542px] text-[clamp(11px,min(.9vw,1.8svh),14px)] leading-[1.4] text-[#1f0a14]/50" style={revealDelay(2 + question.options.length)}>
               Results vary by individual. Suitability and graft requirement are confirmed after consultation.
             </p>
+          )}
+          {question.id === "budget" && (
+            // Reassurance beside the price question, under the options.
+            <section className="reveal-in mt-[clamp(8px,1.8svh,20px)] max-w-[720px] rounded-xl border-l-4 border-[#ED575C] bg-white px-[clamp(14px,1.4vw,20px)] py-[clamp(8px,1.5svh,16px)] shadow-[0_10px_28px_-22px_rgba(106,17,61,0.5)]" style={revealDelay(2 + question.options.length)} aria-labelledby="why-choose-title">
+              <h2 id="why-choose-title" className="text-[clamp(15px,min(1.35vw,2.6svh),21px)] leading-[1.25] font-bold text-[#6A113D]">{WHY_CHOOSE.title}</h2>
+              <ul className="mt-[clamp(6px,1.2svh,12px)] grid gap-x-6 gap-y-[clamp(5px,1.1svh,11px)] sm:grid-cols-2">
+                {WHY_CHOOSE.points.map((point) => (
+                  <li key={point.title} className="flex gap-2">
+                    <span aria-hidden="true" className="mt-[3px] grid size-[18px] shrink-0 place-items-center rounded-full bg-[#6A113D] text-white">
+                      <svg viewBox="0 0 24 24" className="size-2.5 fill-none stroke-current stroke-[3.5] [stroke-linecap:round] [stroke-linejoin:round]"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-[clamp(13px,min(1.12vw,2.15svh),17px)] leading-[1.25] font-semibold text-[#1f0a14]">{point.title}</p>
+                      <p className="mt-0.5 text-[clamp(12px,min(.95vw,1.85svh),15px)] leading-[1.35] text-[#1f0a14]/70">{point.text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section>
           )}
         </form>
         {panel}
@@ -425,9 +446,19 @@ export default function HairTransplantQuestion() {
                 </div>
               ))}
             </div>
-            <p className="reveal-in font-semibold text-[#1f0a14]" style={revealDelay(paragraphs.length + 1)}>{MESSAGE_CLOSE}</p>
+            {/* Clinic registration, set apart as a verifiable credential. */}
+            <div className="reveal-in flex items-center gap-3 rounded-xl border border-[#6A113D]/20 bg-[#FDEEEE] px-[clamp(12px,1.2vw,16px)] py-[clamp(8px,1.5svh,12px)]" style={revealDelay(paragraphs.length + 1)}>
+              <span aria-hidden="true" className="grid size-[clamp(30px,4.5svh,38px)] shrink-0 place-items-center rounded-full bg-[#6A113D] text-white">
+                <svg viewBox="0 0 24 24" className="size-[55%] fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3Z" /><path d="m8.8 12.2 2.3 2.3 4.4-4.6" /></svg>
+              </span>
+              <p className="min-w-0 leading-[1.3]">
+                <span className="block text-[clamp(11px,min(.9vw,1.8svh),13.5px)] font-medium tracking-normal text-[#1f0a14]/70">{CEA_REGISTRATION.label}</span>
+                <span className="mt-0.5 block text-[clamp(14px,min(1.25vw,2.5svh),19px)] font-bold tracking-[0.06em] break-all text-[#6A113D]">{CEA_REGISTRATION.number}</span>
+              </p>
+            </div>
+            <p className="reveal-in font-semibold text-[#1f0a14]" style={revealDelay(paragraphs.length + 2)}>{MESSAGE_CLOSE}</p>
           </div>
-          <button className={BTN} style={revealDelay(paragraphs.length + 2)} type="button" onClick={() => go("contact")}>Continue</button>
+          <button className={BTN} style={revealDelay(paragraphs.length + 3)} type="button" onClick={() => go("contact")}>Continue</button>
         </div>
         {panel}
       </>
@@ -506,7 +537,7 @@ export default function HairTransplantQuestion() {
       <RevealStyles />
         <FloatingBackground />
       <BrandLogo />
-      <div className="grid h-full min-h-0 grid-cols-2 items-center gap-x-[8vw] overflow-y-auto px-[8vw] pt-[clamp(64px,12svh,100px)] pb-[clamp(44px,7svh,64px)] [@media(max-width:700px)]:grid-cols-1 [@media(max-width:700px)]:grid-rows-[auto_minmax(0,1fr)] [@media(max-width:700px)]:gap-4 [@media(max-width:700px)]:px-[9vw]">
+      <div className={`grid h-full min-h-0 ${phase === "budget" ? "grid-cols-[1.4fr_1fr]" : "grid-cols-2"} items-center gap-x-[8vw] px-[8vw] [@media(max-width:700px)]:overflow-y-auto pt-[clamp(64px,12svh,100px)] pb-[clamp(44px,7svh,64px)] [@media(max-width:700px)]:grid-cols-1 [@media(max-width:700px)]:grid-rows-[auto_minmax(0,1fr)] [@media(max-width:700px)]:gap-4 [@media(max-width:700px)]:px-[9vw]`}>
         {body}
       </div>
       {nav}
