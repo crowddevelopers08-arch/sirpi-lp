@@ -5,6 +5,8 @@
    Tabs (created automatically on the first lead):
      "Website Leads" — the gynecomastia lead form
        Timestamp | Source | Name | Phone | Email | City | Concern | URL | TeleCRM
+     "General Leads" — the /general landing page popup (source "General Landing Page")
+       Timestamp | Source | Name | Phone | City | Concern | URL | TeleCRM
      "Review Leads"  — the /review page
        Timestamp | Source | Name | Phone | Rating | Callback | Message | URL | TeleCRM
 
@@ -20,11 +22,16 @@
       Version "New version" → Deploy (the /exec URL stays the same).
    ============================================================ */
 
-var LEADS_TAB  = 'Website Leads';
-var REVIEW_TAB = 'Review Leads';
+var LEADS_TAB   = 'Website Leads';
+var GENERAL_TAB = 'General Leads';
+var REVIEW_TAB  = 'Review Leads';
 
-var LEAD_HEADERS   = ['Timestamp', 'Source', 'Name', 'Phone', 'Email', 'City', 'Concern', 'URL', 'TeleCRM'];
-var REVIEW_HEADERS = ['Timestamp', 'Source', 'Name', 'Phone', 'Rating', 'Callback', 'Message', 'URL', 'TeleCRM'];
+// Must match the `source` the /general popup sends (components/generic-lp/lead-popup.tsx).
+var GENERAL_SOURCE = 'General Landing Page';
+
+var LEAD_HEADERS    = ['Timestamp', 'Source', 'Name', 'Phone', 'Email', 'City', 'Concern', 'URL', 'TeleCRM'];
+var GENERAL_HEADERS = ['Timestamp', 'Source', 'Name', 'Phone', 'City', 'Concern', 'URL', 'TeleCRM'];
+var REVIEW_HEADERS  = ['Timestamp', 'Source', 'Name', 'Phone', 'Rating', 'Callback', 'Message', 'URL', 'TeleCRM'];
 
 // Sirpi brand colours for the header row.
 var HEADER_BG   = '#6A113D';
@@ -38,12 +45,19 @@ function doPost(e) {
 
     var data = parseBody_(e);
     var isReview = data.isReview === true || data.source === 'Review Page';
+    var isGeneral = !isReview && data.source === GENERAL_SOURCE;
 
-    var sheet = isReview
-      ? getOrCreateTab_(REVIEW_TAB, REVIEW_HEADERS)
-      : getOrCreateTab_(LEADS_TAB, LEAD_HEADERS);
-
-    var row = isReview ? buildReviewRow_(data) : buildLeadRow_(data);
+    var sheet, row;
+    if (isReview) {
+      sheet = getOrCreateTab_(REVIEW_TAB, REVIEW_HEADERS);
+      row = buildReviewRow_(data);
+    } else if (isGeneral) {
+      sheet = getOrCreateTab_(GENERAL_TAB, GENERAL_HEADERS);
+      row = buildGeneralRow_(data);
+    } else {
+      sheet = getOrCreateTab_(LEADS_TAB, LEAD_HEADERS);
+      row = buildLeadRow_(data);
+    }
     sheet.appendRow(row);
 
     // Phone numbers as plain text, so a leading 0 / +91 is never eaten.
@@ -98,6 +112,20 @@ function buildLeadRow_(d) {
     d.name || '',
     d.phone || '',
     d.email || '',
+    d.city || '',
+    d.concern || '',
+    d.pageUrl || d.url || '',
+    d.telecrm || '',
+  ];
+}
+
+// /general popup — no email field, so no Email column.
+function buildGeneralRow_(d) {
+  return [
+    d.timestamp || now_(),
+    d.source || GENERAL_SOURCE,
+    d.name || '',
+    d.phone || '',
     d.city || '',
     d.concern || '',
     d.pageUrl || d.url || '',

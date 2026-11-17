@@ -1,0 +1,45 @@
+.points {
+  overflow: hidden;
+  padding-block: 6px;
+  mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: scroll-points 28s linear infinite;
+}
+
+.group {
+  display: flex;
+  flex-shrink: 0;
+  gap: 12px;
+  margin: 0;
+  padding: 0 12px 0 0;
+  list-style: none;
+}
+
+.points:hover .track {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-points {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .points {
+    overflow-x: auto;
+    mask-image: none;
+  }
+
+  .track {
+    animation: none;
+  }
+
+  .group[aria-hidden="true"] {
+    display: none;
+  }
+}
