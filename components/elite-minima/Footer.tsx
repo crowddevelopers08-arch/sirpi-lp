@@ -4,6 +4,7 @@ import Image from "next/image"
 import { LuPhone, LuMail, LuMapPin, LuClock } from "react-icons/lu"
 import { FaWhatsapp } from "react-icons/fa"
 import { track } from "./track"
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images"
 import {
   BRAND,
   BRAND_FULL,
@@ -38,7 +39,7 @@ export default function Footer() {
           {/* The mark is printed for white; on the dark footer it sits on its own
               paper chip rather than being knocked out. */}
           <span className="inline-flex rounded-2xl bg-white px-4 py-3">
-            <Image src="/CIRCLE-STICKER-LOGO.png" alt={BRAND_FULL} width={776} height={180} className="h-9 w-auto sm:h-10" />
+            <Image src={CLOUDINARY_IMAGES.logo} alt={BRAND_FULL} width={776} height={180} className="h-9 w-auto sm:h-10" />
           </span>
           <p className="mt-4 text-[0.92rem] leading-relaxed text-white/60">
             {BRAND_FULL} offers personalized consultation and gynecomastia correction in Coimbatore, with treatment planned around chest contour, symmetry, body proportions and individual expectations.

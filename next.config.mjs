@@ -12,7 +12,7 @@ const nextConfig = {
     // optimizer today, so this only matters if that flag is ever dropped —
     // without it next/image would reject the remote host.
     remotePatterns: [
-      { protocol: "https", hostname: "res.cloudinary.com", pathname: "/k4ojpvgo/**" },
+      { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" },
     ],
   },
 }

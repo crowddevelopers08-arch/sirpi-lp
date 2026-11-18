@@ -1,17 +1,19 @@
-/* Images for the general landing page (/general). All files live in /public. */
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images";
+
+/* Images for the general landing page (/general), delivered from Cloudinary. */
 
 export const IMG = {
   // treatments carousel
-  gynecomastia: "/option-1.jpg",
-  hairTransplant: "/hair-treatment-1.jpg",
-  liposuction: "/front2-13.jpg",
-  bodyContouring: "/11-Large.jpeg",
-  skinTightening: "/option-2.jpg",
+  gynecomastia: CLOUDINARY_IMAGES.treatment.option1,
+  hairTransplant: CLOUDINARY_IMAGES.hair.treatment1,
+  liposuction: CLOUDINARY_IMAGES.treatment.liposuction,
+  bodyContouring: CLOUDINARY_IMAGES.treatment.bodyContouring,
+  skinTightening: CLOUDINARY_IMAGES.treatment.option2,
 
   // hero + doctor
-  hero: "/hair-treatment-2.jpg",
-  doctor: "/DSC3351.jpg",
+  hero: CLOUDINARY_IMAGES.hair.hero,
+  doctor: CLOUDINARY_IMAGES.doctor,
 
   // logo (white wordmark on its own burgundy ground)
-  logo: "/CIRCLE-STICKER-LOGO.png",
+  logo: CLOUDINARY_IMAGES.logo,
 } as const;

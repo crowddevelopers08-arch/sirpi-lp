@@ -6,6 +6,7 @@ import { Menu, Phone, X } from "lucide-react"
 import { track } from "../track"
 import { BRAND_FULL } from "../config"
 import { GYN_BRANCH, GYN_PHONE_DISPLAY, GYN_PHONE_TEL } from "./content"
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images"
 
 const NAV = [
   { label: "Reviews", href: "#reviews", id: "reviews" },
@@ -72,7 +73,7 @@ export default function GynHeader() {
               colour as this bar — so it sits straight on it, no plate. Height
               only, so it keeps its 1029×402 shape instead of being stretched. */}
           <Image
-            src="/CIRCLE-STICKER-LOGO.png"
+            src={CLOUDINARY_IMAGES.logo}
             alt={BRAND_FULL}
             width={1029}
             height={402}

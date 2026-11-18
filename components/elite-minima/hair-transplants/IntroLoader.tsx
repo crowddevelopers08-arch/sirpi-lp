@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BRAND_FULL } from "../config";
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images";
 
 /*
   Intro shown over the hair transplant form when the page opens.
@@ -84,7 +85,7 @@ export default function IntroLoader() {
       <div className="relative flex min-h-[120px] items-center justify-center">
         {showLogo ? (
           <div className="ht-logo flex flex-col items-center">
-            <Image src="/CIRCLE-STICKER-LOGO.png" alt={BRAND_FULL} width={1029} height={402} priority className="h-[clamp(72px,14vw,130px)] w-auto" />
+            <Image src={CLOUDINARY_IMAGES.logo} alt={BRAND_FULL} width={1029} height={402} priority className="h-[clamp(72px,14vw,130px)] w-auto" />
             <p className="mt-4 text-[clamp(11px,1.2vw,14px)] font-semibold uppercase tracking-[0.32em] text-white/75">
               Aesthetics · Coimbatore
             </p>

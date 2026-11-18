@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 import { IMG } from "@/components/generic-lp/images";
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images";
 
 
 const CONDITIONS = [
@@ -47,12 +48,12 @@ const CTA = "Submit Your Details";
 
 const IMAGES: Record<string, { src: string; pos?: string }> = {
   Gynecomastia: { src: IMG.gynecomastia },
-  Liposuction: { src: "/images-3.jpg" },
-  "Mommy Makeover": { src: "/images-1.webp" },
-  "Tummy Tuck": { src: "/images-4.jpg" },
-  "Sagging Breast Correction": { src: "/images-2.webp", pos: "50% 20%" },
-  Rhinoplasty: { src: "/images-6.png" },
-  "Arm Liposuction": { src: "/images-7.png" },
+  Liposuction: { src: CLOUDINARY_IMAGES.treatment.images3 },
+  "Mommy Makeover": { src: CLOUDINARY_IMAGES.treatment.images1 },
+  "Tummy Tuck": { src: CLOUDINARY_IMAGES.treatment.images4 },
+  "Sagging Breast Correction": { src: CLOUDINARY_IMAGES.treatment.images2, pos: "50% 20%" },
+  Rhinoplasty: { src: CLOUDINARY_IMAGES.treatment.images6 },
+  "Arm Liposuction": { src: CLOUDINARY_IMAGES.treatment.images7 },
 };
 
 const ArrowIcon = ({ className = "" }: { className?: string }) => (

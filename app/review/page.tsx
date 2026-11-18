@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images";
 
 // Lato, the site's typeface, is loaded once in app/layout.tsx as --font-lato.
 const FONT = 'font-[family-name:var(--font-lato)]';
@@ -9,8 +10,7 @@ const FONT = 'font-[family-name:var(--font-lato)]';
 const RATINGS = ['Terrible', 'Poor', 'Okay', 'Good', 'Excellent'];
 const EMOJIS = ['😞', '😟', '😐', '😊', '🤩'];
 
-const LOGO_SRC =
-  '/CIRCLE-STICKER-LOGO.png';
+const LOGO_SRC = CLOUDINARY_IMAGES.logo;
 
 // Carewell Clinic and  — Google Business listing (CID from the map embed
 // in components/ContactMapSection.tsx). Replace with the short

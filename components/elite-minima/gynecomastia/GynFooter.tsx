@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Mail, MapPin, Phone } from "lucide-react"
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa"
 import { track } from "../track"
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images"
 import {
   ADDRESS_FULL,
   ADDRESS_SHORT,
@@ -40,7 +41,7 @@ export default function GynFooter() {
           <div className="max-w-[38ch]">
             {/* The logo carries its own burgundy ground, so it sits straight on
                 the footer — no white plate. Height only, so it keeps its shape. */}
-            <Image src="/CIRCLE-STICKER-LOGO.png" alt={BRAND_FULL} width={1029} height={402} className="h-16 w-auto sm:h-20" />
+            <Image src={CLOUDINARY_IMAGES.logo} alt={BRAND_FULL} width={1029} height={402} className="h-16 w-auto sm:h-20" />
             <p className="g-display mt-5 text-[1rem] tracking-[0.06em] text-[var(--g-text)]">Sirpi Aesthetics - Cosmetic Surgery Centre.</p>
             <p className="mt-2 text-[0.9rem]">{ADDRESS_SHORT}</p>
 

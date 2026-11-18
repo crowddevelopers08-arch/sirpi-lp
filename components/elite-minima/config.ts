@@ -1,3 +1,5 @@
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images"
+
 // Sirpi Aesthetics contact details supplied by the clinic.
 
 export const BRAND = "Sirpi Aesthetics"
@@ -63,11 +65,11 @@ const CDN = "https://res.cloudinary.com/k4ojpvgo/image/upload"
 
 export const IMAGES = {
   /** Full brand lockup — mark plus wordmark. Header, footer, standalone pages. */
-  logoLockup: "/CIRCLE-STICKER-LOGO.png",
+  logoLockup: CLOUDINARY_IMAGES.logo,
   /** Mark only, no wordmark. Used where horizontal space is tight. */
-  logoMark: "/CIRCLE-STICKER-LOGO.png",
+  logoMark: CLOUDINARY_IMAGES.logo,
   /** Square clinic logo, for avatars and share targets. */
-  logoSquare: "/CIRCLE-STICKER-LOGO.png",
+  logoSquare: CLOUDINARY_IMAGES.logo,
   /** Hero still (photo) and its illustrated alternative. */
   hero: `${CDN}/v1785733387/hero_qbuuvr.jpg`,
   heroIllustration: `${CDN}/v1785733388/hero_hv8qyi.png`,

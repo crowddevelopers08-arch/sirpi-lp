@@ -2,8 +2,9 @@
 
 import Image from "next/image"
 import { useEffect, useRef } from "react"
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images"
 
-const photos = Array.from({ length: 7 }, (_, index) => `/bfaf-${index + 1}.jpg`)
+const photos = CLOUDINARY_IMAGES.beforeAfter
 
 /** Seconds for the strip to travel one full set of photos. */
 const LOOP_SECONDS = 45

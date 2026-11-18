@@ -3,10 +3,9 @@
 import Image from "next/image"
 import useEmblaCarousel from "embla-carousel-react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images"
 
-const photos = Array.from({ length: 12 }, (_, index) =>
-  `/clinic-${index + 1}.${index < 8 ? "jpg" : "JPG"}`,
-)
+const photos = CLOUDINARY_IMAGES.clinic
 
 export default function GynGallery() {
   const [carouselRef, carousel] = useEmblaCarousel({ loop: true, align: "start" })

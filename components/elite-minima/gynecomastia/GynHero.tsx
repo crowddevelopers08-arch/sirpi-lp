@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Timer, Landmark, Award, UserRound, CalendarClock, ShieldCheck, Check, Phone, ArrowRight, ChevronRight } from "lucide-react"
 import { track } from "../track"
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images"
 
 /**
  * Gynecomastia Surgery clinic banner — responsive replica.
@@ -114,7 +115,7 @@ function SplitPhoto({ side, sizes }: { side: "before" | "after"; sizes: string }
       }}
     >
       <Image
-        src="/before-1.jpg"
+        src={`${CLOUDINARY_IMAGES.beforeAfter[0]}`}
         alt={`Patient chest ${side} gynecomastia surgery`}
         fill
         priority

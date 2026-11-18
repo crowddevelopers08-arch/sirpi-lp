@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images";
 
 /*
   Before & after results — one card per treatment, from sirpicentre.com/gallery.
@@ -16,14 +17,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 */
 
 const RESULTS = [
-  { title: "Gynecomastia", group: "Men", src: "/gallery/gynecomastia.jpg" },
-  { title: "Hair Transplantation", group: "Hair", src: "/gallery/hair-transplant.jpg" },
-  { title: "Back Liposuction", group: "Body", src: "/gallery/liposuction.jpg" },
-  { title: "Tummy Tuck", group: "Body", src: "/gallery/tummy-tuck.jpg" },
-  { title: "Mommy Makeover", group: "Body", src: "/gallery/mommy-makeover.jpg" },
-  { title: "Rhinoplasty", group: "Face", src: "/gallery/rhinoplasty.jpg" },
-  { title: "Liquid Rhinoplasty", group: "Face", src: "/gallery/liquid-rhinoplasty.jpg" },
-  { title: "Otoplasty (Ear Correction)", group: "Face", src: "/gallery/face-procedures.jpg" },
+  { title: "Gynecomastia", group: "Men", src: CLOUDINARY_IMAGES.gallery.gynecomastia },
+  { title: "Hair Transplantation", group: "Hair", src: CLOUDINARY_IMAGES.gallery.hairTransplant },
+  { title: "Back Liposuction", group: "Body", src: CLOUDINARY_IMAGES.gallery.liposuction },
+  { title: "Tummy Tuck", group: "Body", src: CLOUDINARY_IMAGES.gallery.tummyTuck },
+  { title: "Mommy Makeover", group: "Body", src: CLOUDINARY_IMAGES.gallery.mommyMakeover },
+  { title: "Rhinoplasty", group: "Face", src: CLOUDINARY_IMAGES.gallery.rhinoplasty },
+  { title: "Liquid Rhinoplasty", group: "Face", src: CLOUDINARY_IMAGES.gallery.liquidRhinoplasty },
+  { title: "Otoplasty (Ear Correction)", group: "Face", src: CLOUDINARY_IMAGES.gallery.faceProcedures },
 ] as const;
 
 const GROUPS = ["All", "Men", "Hair", "Body", "Face"] as const;

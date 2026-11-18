@@ -8,6 +8,7 @@ import ThankYouScreen, { type ThankYouVariant } from "./ThankYouScreen";
 import { revealDelay } from "./reveal";
 import { ADDRESS_FULL } from "../config";
 import { track } from "../track";
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images";
 import {
   BARRIER_MESSAGES,
   CALL_SLOTS,
@@ -41,19 +42,19 @@ const QUESTION_IDS = Object.keys(QUESTIONS) as QuestionId[];
 const isQuestion = (phase: Phase): phase is QuestionId => (QUESTION_IDS as string[]).includes(phase);
 
 const clinicGallery = [
-  { src: "/clini01.JPG", alt: "Sirpi Aesthetics clinic, Coimbatore" },
-  { src: "/hair-treatment-1.jpg", alt: "Dr. Srigireesh performing a hair transplant procedure at Sirpi Aesthetics" },
-  { src: "/hair-treatment-2.jpg", alt: "Dr. Srigireesh treating a patient's scalp during a hair transplant at Sirpi Aesthetics" },
-  { src: "/clinic-4.jpg", alt: "Treatment area at Sirpi Aesthetics" },
+  { src: CLOUDINARY_IMAGES.hair.clinic, alt: "Sirpi Aesthetics clinic, Coimbatore" },
+  { src: CLOUDINARY_IMAGES.hair.treatment1, alt: "Dr. Srigireesh performing a hair transplant procedure at Sirpi Aesthetics" },
+  { src: CLOUDINARY_IMAGES.hair.hero, alt: "Dr. Srigireesh treating a patient's scalp during a hair transplant at Sirpi Aesthetics" },
+  { src: CLOUDINARY_IMAGES.clinic[3], alt: "Treatment area at Sirpi Aesthetics" },
 ];
 const resultsGallery = [
-  { src: "/HT-PT-3.jpg", alt: "Hair transplant before and after, 3-year result, by Dr. Srigireesh at Sirpi Aesthetics" },
-  { src: "/bfafs-2.png", alt: "Procedure room at Sirpi Aesthetics, Coimbatore" },
-  { src: "/bfafs-3.png", alt: "Hair transplant before and after result by Dr. Srigireesh at Sirpi Aesthetics" },
-  { src: "/HT-RESULTS-2.jpg", alt: "Dr. Srigireesh during a hair transplant procedure at Sirpi Aesthetics" },
+  { src: CLOUDINARY_IMAGES.hair.patient3Year, alt: "Hair transplant before and after, 3-year result, by Dr. Srigireesh at Sirpi Aesthetics" },
+  { src: CLOUDINARY_IMAGES.hair.beforeAfter2, alt: "Procedure room at Sirpi Aesthetics, Coimbatore" },
+  { src: CLOUDINARY_IMAGES.hair.beforeAfter3, alt: "Hair transplant before and after result by Dr. Srigireesh at Sirpi Aesthetics" },
+  { src: CLOUDINARY_IMAGES.hair.results, alt: "Dr. Srigireesh during a hair transplant procedure at Sirpi Aesthetics" },
 ];
-const doctor = { src: "/DSC3351.jpg", alt: "Dr. Srigireesh A R, Plastic Surgeon at Sirpi Aesthetics" };
-const doctorMessage = { src: "/dr-srigireesh-suit.jpg", alt: "Dr. Srigireesh A R, Plastic Surgeon at Sirpi Aesthetics" };
+const doctor = { src: CLOUDINARY_IMAGES.doctor, alt: "Dr. Srigireesh A R, Plastic Surgeon at Sirpi Aesthetics" };
+const doctorMessage = { src: CLOUDINARY_IMAGES.doctorSuit, alt: "Dr. Srigireesh A R, Plastic Surgeon at Sirpi Aesthetics" };
 const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(`Sirpi Aesthetics, ${ADDRESS_FULL}`)}&output=embed`;
 
 type Visual = "gallery" | "doctor" | "map" | "clinic" | "result";
@@ -347,7 +348,7 @@ export default function HairTransplantQuestion() {
       // object-contain: the photo is a side-by-side pair, so neither half may be cropped.
       <figure className={`${PANEL} m-0 flex aspect-[4/3] max-w-[calc((100svh-164px)*1.33)] flex-col bg-white`} style={revealDelay(8)}>
         <div className="relative min-h-0 flex-1">
-          <Image src="/bfafs-1.JPG" alt="Hair transplant before and after result at Sirpi Aesthetics" fill priority className="object-contain" sizes="(max-width: 700px) 82vw, 43vw" />
+          <Image src={CLOUDINARY_IMAGES.hair.beforeAfter1} alt="Hair transplant before and after result at Sirpi Aesthetics" fill priority className="object-contain" sizes="(max-width: 700px) 82vw, 43vw" />
         </div>
         <figcaption className="shrink-0 bg-[#6A113D] px-3 py-[clamp(6px,1.4svh,12px)] text-center text-[clamp(11px,1vw,15px)] font-semibold text-white">
           Before &amp; after — individual results may vary

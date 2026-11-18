@@ -6,6 +6,7 @@ import { ArrowRight, BadgeCheck, ChevronDown } from "lucide-react"
 import { Reveal, Stagger, StaggerItem } from "../motion"
 import { track } from "../track"
 import { GYN_BRANCH, SURGEON } from "./content"
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images"
 
 const CARE_REASONS = [
   {
@@ -88,7 +89,7 @@ export default function GynSurgeon() {
 
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-[var(--g-bone-2)] lg:aspect-auto lg:min-h-[400px] lg:flex-1">
               <Image
-                src="/DSC3351.jpg"
+                src={CLOUDINARY_IMAGES.doctor}
                 alt={`${SURGEON.name} — ${SURGEON.title}`}
                 fill
                 sizes="(min-width: 1024px) 46vw, 100vw"

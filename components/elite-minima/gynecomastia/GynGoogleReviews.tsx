@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react"
 import { FcGoogle } from "react-icons/fc"
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images"
 
 const reviews = [
   {
@@ -90,7 +91,7 @@ export default function GynGoogleReviews() {
       id="reviews"
       aria-labelledby="google-reviews-heading"
       className="relative isolate overflow-hidden bg-[var(--g-accent-deep)] text-[var(--g-ink)]"
-      style={{ backgroundImage: "url('/clinic-1.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
+      style={{ backgroundImage: `url(${CLOUDINARY_IMAGES.clinic[0]})`, backgroundSize: "cover", backgroundPosition: "center" }}
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-[#270817]/80 via-[#270817]/60 to-[#270817]/80" />

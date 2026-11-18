@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images";
 
 /*
   Floating background for the hair transplant form: the four Sirpi hair icons
@@ -48,7 +49,7 @@ export default function FloatingBackground() {
       `}</style>
 
       {ICONS.map(([icon, left, top, size, colour, opacity, t, d, r], i) => {
-        const mask = `url(/sirp-icon-${icon}.png) center / contain no-repeat`;
+        const mask = `url(${CLOUDINARY_IMAGES.icons[icon - 1]}) center / contain no-repeat`;
         return (
           <span
             key={`i${i}`}

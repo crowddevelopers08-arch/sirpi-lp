@@ -6,6 +6,7 @@
 // components so a copy edit never means touching layout.
 
 import { cldTransform, IMAGES } from "../config"
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images"
 
 /** Branch tag on every lead, analytics event and CRM row from this page, so
     gynecomastia traffic is separable from / and /general. */
@@ -197,15 +198,15 @@ export interface GynOption {
    not show. */
 const GLAND: GynImage = { src: IMAGES.glandExcision, alt: "Gland excision for gynecomastia correction" }
 const LIPO_ONE: GynImage = {
-  src: "/front2-13.jpg",
+  src: CLOUDINARY_IMAGES.treatment.liposuction,
   alt: "Liposuction planning markings drawn on the flank",
 }
 const GLAND_MARKING: GynImage = {
-  src: "/option-1.jpg",
+  src: CLOUDINARY_IMAGES.treatment.option1,
   alt: "Incision markings around the areola for glandular tissue excision",
 }
 const SKIN_TIGHTENING: GynImage = {
-  src: "/option-2.jpg",
+  src: CLOUDINARY_IMAGES.treatment.option2,
   alt: "Before and after skin tightening of the abdomen at Sirpi Aesthetics",
 }
 const CONTOUR_BODY: GynImage = {

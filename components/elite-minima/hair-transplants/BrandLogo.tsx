@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { BRAND_FULL, PHONE_DISPLAY, PHONE_TEL } from "../config";
 import { track } from "../track";
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images";
 
 /** Header bar: Sirpi logo on its own burgundy ground, call button on the right. */
 export default function BrandLogo() {
   return (
     <header className="absolute inset-x-0 top-0 z-10 flex items-center justify-between gap-3 bg-[#6A113D] px-4 py-2 sm:px-25">
-      <Image src="/CIRCLE-STICKER-LOGO.png" alt={BRAND_FULL} width={1029} height={402} priority className="h-[clamp(40px,7svh,56px)] w-auto" />
+      <Image src={CLOUDINARY_IMAGES.logo} alt={BRAND_FULL} width={1029} height={402} priority className="h-[clamp(40px,7svh,56px)] w-auto" />
       <a
         href={`tel:${PHONE_TEL}`}
         onClick={() => track("call_click", { section: "hair-transplant-form" })}

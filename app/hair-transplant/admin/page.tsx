@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { dateRanges, filterQuery, leadWhere, parseLeadFilters, startOfDayInIndia } from "@/lib/lead-filters";
 import { NOT_INTERESTED_CATEGORY, OUTSTATION_CATEGORY } from "@/lib/form-options";
 import AutoRefresh from "./AutoRefresh";
+import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images";
 
 export const metadata: Metadata = { title: "Leads | Sirpi Aesthetics Hair Transplant", robots: { index: false, follow: false } };
 
@@ -75,7 +76,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
       <header className="sticky top-0 z-20 bg-[#6A113D]">
         <div className="flex items-center justify-between gap-4 px-4 py-2.5 sm:px-8">
           <div className="flex items-center gap-4">
-            <Image src="/CIRCLE-STICKER-LOGO.png" alt="Sirpi Aesthetics" width={1029} height={402} priority className="h-11 w-auto" />
+            <Image src={CLOUDINARY_IMAGES.logo} alt="Sirpi Aesthetics" width={1029} height={402} priority className="h-11 w-auto" />
             <span className="hidden border-l border-white/25 pl-4 text-sm font-semibold text-white/80 lg:block">Hair transplant leads</span>
           </div>
           <div className="flex items-center gap-3 [&_.text-\[\#1f0a14\]\/60]:text-white/70">
