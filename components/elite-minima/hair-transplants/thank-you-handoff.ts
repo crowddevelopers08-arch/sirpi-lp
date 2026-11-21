@@ -10,7 +10,13 @@ import type { ThankYouVariant } from "./ThankYouScreen";
 export const THANK_YOU_PATH = "/hair-transplant/thank-you";
 const KEY = "sirpi-ht-thank-you";
 
-export type ThankYouData = { name: string; phone: string; variant: ThankYouVariant };
+export type ThankYouData = {
+  name: string;
+  phone: string;
+  variant: ThankYouVariant;
+  /** set once the Meta Pixel Lead for this submission has fired (so a refresh doesn't fire it again) */
+  leadSent?: boolean;
+};
 
 export function saveThankYou(data: ThankYouData) {
   try {
@@ -26,7 +32,12 @@ export function readThankYou(): ThankYouData | null {
     if (!raw) return null;
     const data = JSON.parse(raw) as Partial<ThankYouData>;
     const variant: ThankYouVariant = data.variant === "outstation" || data.variant === "closed" ? data.variant : "booked";
-    return { name: typeof data.name === "string" ? data.name : "", phone: typeof data.phone === "string" ? data.phone : "", variant };
+    return {
+      name: typeof data.name === "string" ? data.name : "",
+      phone: typeof data.phone === "string" ? data.phone : "",
+      variant,
+      leadSent: data.leadSent === true,
+    };
   } catch {
     return null;
   }

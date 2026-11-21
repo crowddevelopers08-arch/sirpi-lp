@@ -220,7 +220,7 @@ export default function HairTransplantQuestion() {
       setSaveError(error);
       return;
     }
-    track("lead_submit", { branch: "Sirpi Aesthetics — Hair Transplant", notInterested: true });
+    track("lead_submit", { branch: "Sirpi Aesthetics — Hair Transplant", notInterested: true, metaLead: false });
     goToThankYou("closed");
   }
 
@@ -241,7 +241,7 @@ export default function HairTransplantQuestion() {
       setSaveError(error);
       return;
     }
-    track("lead_submit", { branch: "Sirpi Aesthetics — Hair Transplant", outstation });
+    track("lead_submit", { branch: "Sirpi Aesthetics — Hair Transplant", outstation, metaLead: false });
     goToThankYou(outstation ? "outstation" : "booked");
   }
 

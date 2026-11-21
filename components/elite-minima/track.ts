@@ -28,10 +28,13 @@ export function adsConversion(sendTo: string) {
 
 export function track(name: string, data?: Record<string, unknown>) {
   if (typeof window === "undefined") return
+  // `metaLead: false` — this form's thank-you page fires the Meta Lead itself,
+  // so don't fire it here as well (it would count every lead twice).
+  const { metaLead, ...rest } = data || {}
   window.dataLayer = window.dataLayer || []
-  window.dataLayer.push(Object.assign({ event: name }, data || {}))
+  window.dataLayer.push(Object.assign({ event: name }, rest))
   if (typeof window.fbq === "function") {
-    if (name === "lead_submit") window.fbq("track", "Lead")
+    if (name === "lead_submit" && metaLead !== false) window.fbq("track", "Lead")
     if (name === "call_click" || name === "whatsapp_click") window.fbq("track", "Contact")
   }
   // Every phone link on the site reports call_click, so hanging the Ads
