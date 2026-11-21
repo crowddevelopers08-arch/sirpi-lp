@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import BrandLogo, { RevealStyles } from "./BrandLogo";
 import FloatingBackground from "./FloatingBackground";
-import ThankYouScreen, { type ThankYouVariant } from "./ThankYouScreen";
+import type { ThankYouVariant } from "./ThankYouScreen";
+import { saveThankYou, THANK_YOU_PATH } from "./thank-you-handoff";
 import { revealDelay } from "./reveal";
 import { ADDRESS_FULL } from "../config";
 import { track } from "../track";
@@ -93,7 +94,6 @@ export default function HairTransplantQuestion() {
     () => Object.fromEntries(QUESTION_IDS.map((id) => [id, 0])) as Record<QuestionId, number>,
   );
   const [contact, setContact] = useState({ name: "", phone: "", city: "", date: "", slot: "" });
-  const [variant, setVariant] = useState<ThankYouVariant>("booked");
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
   const [fieldError, setFieldError] = useState("");
@@ -149,14 +149,6 @@ export default function HairTransplantQuestion() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [question]);
 
-  function resetAll() {
-    setHistory(["concern"]);
-    setAnswers(Object.fromEntries(QUESTION_IDS.map((id) => [id, 0])) as Record<QuestionId, number>);
-    setContact({ name: "", phone: "", city: "", date: "", slot: "" });
-    setSaveError("");
-    setFieldError("");
-  }
-
   const setField = (field: keyof typeof contact, value: string) => setContact((c) => ({ ...c, [field]: value }));
 
   function handleContact(event: FormEvent) {
@@ -202,6 +194,16 @@ export default function HairTransplantQuestion() {
   }
 
   /** "No, I am not interested" — the exit screen still takes a name and number. */
+  /**
+   * Full page load to /hair-transplant/thank-you (not an in-page swap), so the
+   * thank-you page loads fresh, with its own URL for GTM / Ads. The button
+   * stays disabled ("Submitting…") until the new page takes over.
+   */
+  function goToThankYou(variant: ThankYouVariant) {
+    saveThankYou({ name: contact.name.trim(), phone: contact.phone.replace(/\D/g, "").slice(-10), variant });
+    window.location.assign(THANK_YOU_PATH);
+  }
+
   async function handleExit(event: FormEvent) {
     event.preventDefault();
     if (saving) return;
@@ -213,14 +215,13 @@ export default function HairTransplantQuestion() {
     setSaving(true);
     setSaveError("");
     const error = await postLead();
-    setSaving(false);
     if (error) {
+      setSaving(false);
       setSaveError(error);
       return;
     }
     track("lead_submit", { branch: "Sirpi Aesthetics — Hair Transplant", notInterested: true });
-    setVariant("closed");
-    go("thankyou");
+    goToThankYou("closed");
   }
 
   async function handleSchedule(event: FormEvent) {
@@ -235,22 +236,17 @@ export default function HairTransplantQuestion() {
     setSaveError("");
 
     const error = await postLead();
-
-    setSaving(false);
     if (error) {
+      setSaving(false);
       setSaveError(error);
       return;
     }
     track("lead_submit", { branch: "Sirpi Aesthetics — Hair Transplant", outstation });
-    setVariant(outstation ? "outstation" : "booked");
-    go("thankyou");
+    goToThankYou(outstation ? "outstation" : "booked");
   }
 
   /* ── End-of-form screens ─────────────────────────────────────────────── */
 
-  if (phase === "thankyou") {
-    return <ThankYouScreen name={contact.name} phone={contact.phone} variant={variant} onHome={resetAll} />;
-  }
 
   const nav = (
     <nav
