@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import ThankYouScreen from "./ThankYouScreen";
 import { readThankYou, saveThankYou, type ThankYouData } from "./thank-you-handoff";
-import { ADS_CONVERSIONS } from "../track";
 
 /** How long to wait for a tag that loads after the page (the Meta Pixel comes through GTM). */
 const TAG_WAIT_MS = 10000;
@@ -32,9 +31,11 @@ export default function ThankYouView() {
     const saved = readThankYou();
     setData(saved ?? { name: "", phone: "", variant: "booked" });
 
-    // Conversions fire once per real submission:
-    //   no hand-off (URL opened directly) → nothing fires
+    // Meta Lead fires once per real submission:
+    //   no hand-off (URL opened directly) → not sent
     //   already sent (page refreshed)     → not sent again
+    // (The Google Ads "HT Form" conversion is a page-level <Script> in
+    //  app/hair-transplant/thank-you/page.tsx and fires on every load.)
     if (!saved) return;
     let state = { ...saved };
     const mark = (patch: Partial<ThankYouData>) => {
@@ -42,19 +43,6 @@ export default function ThankYouView() {
       saveThankYou(state);
     };
     const stops: (() => void)[] = [];
-
-    // Google Ads — "HT Form conversion page"
-    if (!saved.adsSent) {
-      stops.push(
-        whenReady(
-          () => typeof window.gtag === "function",
-          () => {
-            window.gtag!("event", "conversion", { send_to: ADS_CONVERSIONS.hairLead, value: 1.0, currency: "INR" });
-            mark({ adsSent: true });
-          },
-        ),
-      );
-    }
 
     // Meta Pixel — fbq('track', 'Lead')
     if (!saved.leadSent) {
