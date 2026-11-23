@@ -18,7 +18,7 @@ export const ADS_CONVERSIONS = {
   call: "AW-11106084367/rmZ3CNCfzJ0dEI_M5a8p",
   /** "Gyneacomastia LP conversion page" — the thank-you page. */
   lead: "AW-11106084367/kAnECPOk1J0dEI_M5a8p",
-  /** "HT Form conversion page" — /hair-transplant/thank-you. */
+  /** "HT Forms conversion page" — /hair-transplant/thank-you. */
   hairLead: "AW-11106084367/sRNFCJ6P370dEI_M5a8p",
 } as const
 
