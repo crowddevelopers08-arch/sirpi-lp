@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import ThankYouView from "@/components/elite-minima/hair-transplants/ThankYouView";
 
 export const metadata: Metadata = {
@@ -9,20 +8,28 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function HairTransplantThankYouPage() {
-  return (
-    <>
-      {/* Event snippet for HT Form conversion page — Google Ads, verbatim.
-          Fires on every load of this page, as Google's snippet does (that is
-          also what Tag Assistant checks). `gtag` is defined by the Google tag
-          in app/layout.tsx, which loads before this runs. */}
-      <Script id="ht-form-conversion" strategy="afterInteractive">
-        {`gtag('event', 'conversion', {
+/*
+  Event snippet for HT Form conversion page — Google Ads, verbatim.
+
+  A plain <script> (not next/script): it is written straight into this page's
+  server HTML, so it runs while the page loads and is visible in the page
+  source, which is what Google Ads / Tag Assistant look for. next/script with
+  "afterInteractive" only injected it after hydration, from the RSC payload, and
+  the troubleshooter reported it as not detected.
+
+  `gtag` is defined by the Google tag in <head> (app/layout.tsx), which runs
+  before this body script.
+*/
+const HT_FORM_CONVERSION = `gtag('event', 'conversion', {
     'send_to': 'AW-11106084367/sRNFCJ6P370dEI_M5a8p',
     'value': 1.0,
     'currency': 'INR'
-});`}
-      </Script>
+});`;
+
+export default function HairTransplantThankYouPage() {
+  return (
+    <>
+      <script id="ht-form-conversion" dangerouslySetInnerHTML={{ __html: HT_FORM_CONVERSION }} />
       <ThankYouView />
     </>
   );
