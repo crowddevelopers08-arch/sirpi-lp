@@ -16,6 +16,8 @@ export type ThankYouData = {
   variant: ThankYouVariant;
   /** set once the Meta Pixel Lead for this submission has fired (so a refresh doesn't fire it again) */
   leadSent?: boolean;
+  /** set once the Google Ads "HT Form" conversion for this submission has fired */
+  adsSent?: boolean;
 };
 
 export function saveThankYou(data: ThankYouData) {
@@ -37,6 +39,7 @@ export function readThankYou(): ThankYouData | null {
       phone: typeof data.phone === "string" ? data.phone : "",
       variant,
       leadSent: data.leadSent === true,
+      adsSent: data.adsSent === true,
     };
   } catch {
     return null;
