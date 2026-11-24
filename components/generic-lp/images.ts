@@ -11,7 +11,9 @@ export const IMG = {
   skinTightening: CLOUDINARY_IMAGES.treatment.option2,
 
   // hero + doctor
-  hero: CLOUDINARY_IMAGES.hair.hero,
+  hero: CLOUDINARY_IMAGES.doctor, // clear professional portrait of Dr. Srigireesh
+  heroDetailTop: CLOUDINARY_IMAGES.hair.hero, // hair-treatment-2.jpg
+  heroDetailBottom: CLOUDINARY_IMAGES.clinic[4], // surgical theatre
   doctor: CLOUDINARY_IMAGES.doctor,
 
   // logo (white wordmark on its own burgundy ground)
