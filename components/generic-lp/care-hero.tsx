@@ -32,13 +32,16 @@ export default function CareHero() {
 
       <div className="relative mx-auto grid max-w-[1440px] grid-cols-[minmax(0,1fr)] items-center gap-x-10 gap-y-5 px-4 py-8 sm:px-8 sm:py-14 lg:grid-cols-2 lg:gap-x-12 lg:gap-y-7 lg:px-[7%] lg:py-12">
         <div className="min-w-0 max-lg:contents">
-          <div className="order-1 justify-self-start inline-flex items-center gap-2 rounded-full border border-[#6A113D]/20 bg-white py-1.5 pl-1.5 pr-4 text-[11px] font-bold uppercase leading-none tracking-[0.1em] text-[#6A113D]">
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-[#6A113D] text-white">
-              <svg viewBox="0 0 24 24" className="h-3 w-3" fill="currentColor" aria-hidden>
+          <div className="order-1 justify-self-start inline-flex w-full max-w-[680px] items-center gap-3 rounded-2xl bg-[#6A113D] px-4 py-3 text-white sm:gap-4 sm:px-5">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#ED575C] text-white shadow-sm">
+              <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="currentColor" aria-hidden>
                 <path d="M9.5 3h5v6.5H21v5h-6.5V21h-5v-6.5H3v-5h6.5V3Z" />
               </svg>
             </span>
-            Government Approved Hospital for Cosmetic Surgery in Coimbatore
+            <span className="min-w-0">
+              <span className="block text-[12px] font-extrabold tracking-[0.16em] text-[#FFD4D7] uppercase sm:text-[13px]">Government Approved</span>
+              <span className="mt-0.5 block text-[17px] leading-tight font-bold sm:text-[20px] lg:text-[21px]">Hospital for Cosmetic Surgery in Coimbatore</span>
+            </span>
           </div>
 
           <h1 className="order-2 mt-5 max-lg:mt-0 text-[30px] font-black min-[400px]:text-[32px] leading-[1.12] tracking-[-0.02em] text-[#1f0a14] sm:text-[44px] lg:text-[clamp(40px,2.9vw,54px)]">
@@ -101,7 +104,7 @@ export default function CareHero() {
             />
           </div>
           <div className="relative overflow-hidden rounded-[16px]">
-            <Image src={IMG.heroDetailTop} alt="Treatment at Sirpi Aesthetics, Coimbatore" fill priority sizes="(min-width:1024px) 23vw, 48vw" className="object-cover" />
+            <Image src={IMG.heroDetailTop} alt="Sirpi Aesthetics clinic in Coimbatore" fill priority sizes="(min-width:1024px) 23vw, 48vw" className="object-cover" />
           </div>
           <div className="relative overflow-hidden rounded-[16px]">
             <Image src={IMG.heroDetailBottom} alt="Surgical theatre at Sirpi Aesthetics, Coimbatore" fill priority sizes="(min-width:1024px) 23vw, 48vw" className="object-cover" />

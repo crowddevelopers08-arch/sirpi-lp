@@ -12,7 +12,7 @@ export const IMG = {
 
   // hero + doctor
   hero: CLOUDINARY_IMAGES.doctor, // clear professional portrait of Dr. Srigireesh
-  heroDetailTop: CLOUDINARY_IMAGES.hair.hero, // hair-treatment-2.jpg
+  heroDetailTop: CLOUDINARY_IMAGES.clinic[0], // Sirpi Aesthetics exterior
   heroDetailBottom: CLOUDINARY_IMAGES.clinic[4], // surgical theatre
   doctor: CLOUDINARY_IMAGES.doctor,
 
