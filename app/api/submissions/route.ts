@@ -20,6 +20,7 @@ export const runtime = 'nodejs';
 
 type SubmissionBody = {
   source: string;
+  formName: string;
   name: string;
   phone: string;
   email: string;
@@ -44,6 +45,7 @@ function toText(value: unknown): string {
 function normalizeSubmission(body: Record<string, unknown>): SubmissionBody {
   return {
     source: toText(body.source) || 'Sirpi Aesthetics Website',
+    formName: toText(body.formName),
     name: toText(body.name),
     phone: toText(body.phone),
     email: toText(body.email),
@@ -56,6 +58,7 @@ function normalizeSubmission(body: Record<string, unknown>): SubmissionBody {
 }
 
 const REVIEW_SOURCE = 'Review Page';
+const RHINOPLASTY_FORM_NAME = 'rhinoplasty-leads';
 
 // Column shape for the separate "review leads" tab in the Google Sheet.
 const REVIEW_HEADERS = [
@@ -146,6 +149,7 @@ async function pushToSheet(body: SubmissionBody, timestamp: string, telecrmStatu
     body: JSON.stringify({
       timestamp,
       source: body.source,
+      formName: body.formName,
       name: body.name,
       phone: body.phone,
       email: body.email,
@@ -211,16 +215,17 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
   const fields: Record<string, string> = { phone, name: body.name };
 
   const isReview = body.source === REVIEW_SOURCE;
+  const isRhinoplasty = body.formName === RHINOPLASTY_FORM_NAME;
   const ratingText = body.rating ? `${body.rating}/5` : 'Not specified';
   const callbackText = body.callback || 'Not specified';
 
   const details = [
-    `Form Name: ${body.source || 'Website'}`,
+    `Form Name: ${body.formName || body.source || 'Website'}`,
     `Name: ${body.name || 'Not specified'}`,
     `Phone: ${body.phone || 'Not specified'}`,
     ...(isReview
       ? [`Rating: ${ratingText}`, `Callback Requested: ${callbackText}`]
-      : [`Email: ${body.email || 'Not specified'}`, `City: ${body.city || 'Not specified'}`]),
+      : [`Email: ${body.email || 'Not specified'}`, ...(isRhinoplasty ? [] : [`City: ${body.city || 'Not specified'}`])]),
     `Concern: ${body.concern || 'Not specified'}`,
     `URL: ${body.pageUrl || 'Not specified'}`,
   ].join(' | ');
@@ -229,7 +234,7 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
     fields,
     actions: [
       { type: 'SYSTEM_NOTE', text: `Details: ${details}` },
-      { type: 'SYSTEM_NOTE', text: `Form Name: ${body.source || 'Website'}` },
+      { type: 'SYSTEM_NOTE', text: `Form Name: ${body.formName || body.source || 'Website'}` },
       { type: 'SYSTEM_NOTE', text: `Name: ${body.name || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `Phone: ${body.phone || 'Not specified'}` },
       ...(isReview
@@ -239,7 +244,7 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
           ]
         : [
             { type: 'SYSTEM_NOTE', text: `Email: ${body.email || 'Not specified'}` },
-            { type: 'SYSTEM_NOTE', text: `City: ${body.city || 'Not specified'}` },
+            ...(isRhinoplasty ? [] : [{ type: 'SYSTEM_NOTE', text: `City: ${body.city || 'Not specified'}` }]),
           ]),
       { type: 'SYSTEM_NOTE', text: `Condition: ${body.concern || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `URL: ${body.pageUrl || 'Not specified'}` },

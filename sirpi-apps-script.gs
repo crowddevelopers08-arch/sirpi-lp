@@ -25,13 +25,17 @@
 var LEADS_TAB   = 'Website Leads';
 var GENERAL_TAB = 'General Leads';
 var REVIEW_TAB  = 'Review Leads';
+var RHINOPLASTY_TAB = 'rhinoplasty-leads';
 
 // Must match the `source` the /general popup sends (components/generic-lp/lead-popup.tsx).
 var GENERAL_SOURCE = 'General Landing Page';
+var RHINOPLASTY_SOURCE = 'rhinoplasty forms';
+var RHINOPLASTY_FORM_NAME = 'rhinoplasty-leads';
 
 var LEAD_HEADERS    = ['Timestamp', 'Source', 'Name', 'Phone', 'Email', 'City', 'Concern', 'URL', 'TeleCRM'];
 var GENERAL_HEADERS = ['Timestamp', 'Source', 'Name', 'Phone', 'City', 'Concern', 'URL', 'TeleCRM'];
 var REVIEW_HEADERS  = ['Timestamp', 'Source', 'Name', 'Phone', 'Rating', 'Callback', 'Message', 'URL', 'TeleCRM'];
+var RHINOPLASTY_HEADERS = ['Timestamp', 'Source', 'Form Name', 'Name', 'Phone', 'Email', 'Concern', 'URL', 'TeleCRM'];
 
 // Sirpi brand colours for the header row.
 var HEADER_BG   = '#6A113D';
@@ -46,22 +50,30 @@ function doPost(e) {
     var data = parseBody_(e);
     var isReview = data.isReview === true || data.source === 'Review Page';
     var isGeneral = !isReview && data.source === GENERAL_SOURCE;
+    var isRhinoplasty = !isReview && data.source === RHINOPLASTY_SOURCE && data.formName === RHINOPLASTY_FORM_NAME;
 
-    var sheet, row;
+    var sheet, row, headers;
     if (isReview) {
       sheet = getOrCreateTab_(REVIEW_TAB, REVIEW_HEADERS);
       row = buildReviewRow_(data);
+      headers = REVIEW_HEADERS;
     } else if (isGeneral) {
       sheet = getOrCreateTab_(GENERAL_TAB, GENERAL_HEADERS);
       row = buildGeneralRow_(data);
+      headers = GENERAL_HEADERS;
+    } else if (isRhinoplasty) {
+      sheet = getOrCreateTab_(RHINOPLASTY_TAB, RHINOPLASTY_HEADERS);
+      row = buildRhinoplastyRow_(data);
+      headers = RHINOPLASTY_HEADERS;
     } else {
       sheet = getOrCreateTab_(LEADS_TAB, LEAD_HEADERS);
       row = buildLeadRow_(data);
+      headers = LEAD_HEADERS;
     }
     sheet.appendRow(row);
 
     // Phone numbers as plain text, so a leading 0 / +91 is never eaten.
-    sheet.getRange(sheet.getLastRow(), 4).setNumberFormat('@');
+    sheet.getRange(sheet.getLastRow(), headers.indexOf('Phone') + 1).setNumberFormat('@');
 
     return json_({ success: true, tab: sheet.getName(), row: sheet.getLastRow() });
   } catch (err) {
@@ -127,6 +139,22 @@ function buildGeneralRow_(d) {
     d.name || '',
     d.phone || '',
     d.city || '',
+    d.concern || '',
+    d.pageUrl || d.url || '',
+    d.telecrm || '',
+  ];
+}
+
+// Rhinoplasty form has no City field. Keep the sheet columns aligned with the
+// actual visitor form and record the submitted form name explicitly.
+function buildRhinoplastyRow_(d) {
+  return [
+    d.timestamp || now_(),
+    d.source || RHINOPLASTY_SOURCE,
+    d.formName || RHINOPLASTY_FORM_NAME,
+    d.name || '',
+    d.phone || '',
+    d.email || '',
     d.concern || '',
     d.pageUrl || d.url || '',
     d.telecrm || '',

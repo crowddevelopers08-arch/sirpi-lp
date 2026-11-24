@@ -41,7 +41,11 @@ export default function SmoothScroll() {
       // so read the target's own value back rather than hardcoding a second
       // offset that would silently drift from the CSS.
       const margin = parseFloat(getComputedStyle(target).scrollMarginTop)
-      lenis.scrollTo(target as HTMLElement, {
+      // Use the document coordinate rather than passing the element to Lenis.
+      // This avoids a wrong landing position for anchors nested in responsive
+      // grids (such as the rhinoplasty enquiry card on phones).
+      const targetY = window.scrollY + (target as HTMLElement).getBoundingClientRect().top - (Number.isFinite(margin) ? margin : 96)
+      lenis.scrollTo(Math.max(0, targetY), {
         offset: -(Number.isFinite(margin) ? margin : 96),
         duration: 1.1,
       })
