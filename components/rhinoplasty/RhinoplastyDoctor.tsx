@@ -81,7 +81,7 @@ export default function RhinoplastyDoctor() {
               />
             </div>
             <figcaption className="px-3 py-3 text-center text-[14px] font-semibold text-white sm:text-[15px]" style={{ backgroundColor: C.brand }}>
-              Dr. Srigireesh A R â€” Certified Plastic Surgeon
+              Dr. Srigireesh A R Certified Plastic Surgeon
             </figcaption>
           </figure>
 

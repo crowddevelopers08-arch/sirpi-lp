@@ -78,31 +78,25 @@ function topArc(len: number, r = WAVE_R) {
 
 function WaveCircle({ id, label, src, alt, tone }: { id: string; label: string; src: string; alt: string; tone: string; ring2?: string; spin?: 1 | -1 }) {
   // ribbon hugs the label: ~13 units per letter + side padding (the round caps add 15 each end)
-  const ribbon = topArc(label.length * 13 + 26 - 30);
   return (
     <figure className="m-0">
-      <svg viewBox="0 -8 300 308" role="img" aria-label={alt} className="block h-auto w-[min(39vw,180px)] sm:w-[300px] [overflow:visible] lg:w-auto lg:h-[min(17.2vw,37.6svh)]">
+      <svg viewBox="0 0 300 300" role="img" aria-label={alt} className="block h-auto w-[min(39vw,180px)] sm:w-[300px] [overflow:visible] lg:w-auto lg:h-[min(17.2vw,37.6svh)]">
         <defs>
           <clipPath id={`${id}-clip`}>
-            <circle cx="150" cy="150" r="137" />
+            <circle cx="150" cy="150" r="126" />
           </clipPath>
           {/* arc along the top of the wave line, left → right, for the label text */}
-          <path id={`${id}-arc`} d={topArc(220)} />
         </defs>
 
         {/* soft disc behind the photo */}
-        <circle cx="150" cy="150" r="137" fill="#FFF8FA" />
-        <image href={src} x="13" y="13" width="274" height="274" preserveAspectRatio="xMidYMid slice" clipPath={`url(#${id}-clip)`} />
+        <circle cx="150" cy="150" r="140" fill="#FFF8FA" stroke={tone} strokeOpacity="0.18" strokeWidth="2" />
+        <circle cx="150" cy="150" r="132" fill="none" stroke={tone} strokeWidth="3" />
+        <image href={src} x="24" y="24" width="252" height="252" preserveAspectRatio="xMidYMid slice" clipPath={`url(#${id}-clip)`} />
 
         {/* wavy ring (static) */}
-        <path d={RING_OUTER} fill="none" stroke={tone} strokeWidth="3" strokeLinejoin="round" />
-
-        {/* curved label ribbon sitting on the wave line at the top, sized to its text: a thick arc in the label colour, white text riding on it */}
-        <path d={ribbon} fill="none" stroke={tone} strokeWidth="28" strokeLinecap="round" />
-        <text fill="#fff" fontSize="16" fontWeight="900" letterSpacing="2.5" style={{ textTransform: "uppercase" }}>
-          <textPath href={`#${id}-arc`} startOffset="50%" textAnchor="middle" dominantBaseline="middle">
-            {label}
-          </textPath>
+        <rect x="91" y="8" width="118" height="34" rx="17" fill={tone} />
+        <text x="150" y="30" fill="#fff" fontSize="15" fontWeight="900" letterSpacing="1.8" textAnchor="middle">
+          {label.toUpperCase()}
         </text>
       </svg>
     </figure>
