@@ -20,6 +20,7 @@ export const ADS_CONVERSIONS = {
   lead: "AW-11106084367/kAnECPOk1J0dEI_M5a8p",
   /** "HT Forms conversion page" — /hair-transplant/thank-you. */
   hairLead: "AW-11106084367/sRNFCJ6P370dEI_M5a8p",
+  rhinoplastyCall: "AW-11106084367/06w5COTxpb8dEI_M5a8p",
 } as const
 
 /** Fire one Google Ads conversion, if the tag has loaded. */
@@ -45,5 +46,8 @@ export function track(name: string, data?: Record<string, unknown>) {
   // No event_callback and no preventDefault, unlike Google's snippet: a `tel:`
   // link hands off to the dialler without unloading the page, so there is
   // nothing to wait for — and swallowing the click would stop the call.
-  if (name === "call_click") adsConversion(ADS_CONVERSIONS.call)
+  if (name === "call_click") {
+    const sendTo = window.location.pathname === "/rhinoplasty" ? ADS_CONVERSIONS.rhinoplastyCall : ADS_CONVERSIONS.call
+    adsConversion(sendTo)
+  }
 }

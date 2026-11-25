@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IMG } from "@/components/generic-lp/images";
 import { PHONE_TEL } from "@/components/elite-minima/config";
+import { track } from "@/components/elite-minima/track";
 
 const GRAIN = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E")`;
 
@@ -60,6 +61,7 @@ export default function Navbared() {
         {/* CTA Button */}
         <a
           href={`tel:${PHONE_TEL}`}
+          onClick={() => track("call_click", { section: "rhinoplasty-thank-you-header" })}
           className="flex h-11 items-center justify-between gap-3 rounded-full bg-[#6A113D] pl-5 pr-[5px] text-[13px] font-bold text-white no-underline shadow-[0_8px_22px_rgba(106,17,61,0.25)] transition hover:bg-[#571032]"
         >
           <span className="whitespace-nowrap">Call Now</span>

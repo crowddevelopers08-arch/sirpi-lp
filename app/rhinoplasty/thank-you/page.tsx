@@ -8,9 +8,16 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+const RHINOPLASTY_FORM_CONVERSION = `gtag('event', 'conversion', {
+  'send_to': 'AW-11106084367/ZB4VCL-0qr8dEI_M5a8p',
+  'value': 1.0,
+  'currency': 'INR'
+});`;
+
 export default function RhinoplastyThankYouPage() {
   return (
     <>
+      <script id="rhinoplasty-form-conversion" dangerouslySetInnerHTML={{ __html: RHINOPLASTY_FORM_CONVERSION }} />
       <Navbared />
       <ThankYou
         eyebrow="Rhinoplasty Enquiry Received"

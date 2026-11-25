@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IMG } from "@/components/generic-lp/images";
-import { ADDRESS_FULL, EMAIL, HOURS, PHONE_DISPLAY, PHONE_TEL } from "@/components/elite-minima/config";
+import { ADDRESS_FULL, EMAIL, HOURS, PHONE_DISPLAY } from "@/components/elite-minima/config";
+import RhinoplastyCallLink from "./RhinoplastyCallLink";
 
 const MAP_URL = `https://www.google.com/maps?q=${encodeURIComponent(`Sirpi Aesthetics, ${ADDRESS_FULL}`)}&output=embed`;
 
@@ -122,9 +123,9 @@ export default function Footer() {
               <span style={{ color: "rgba(255,253,250,0.76)", fontSize: "15px", lineHeight: 1.6 }}>
                 {ADDRESS_FULL}
               </span>
-              <a href={`tel:${PHONE_TEL}`} style={{ color: "#FFF8FA", textDecoration: "none", fontSize: "15px" }}>
+              <RhinoplastyCallLink section="rhinoplasty-footer" style={{ color: "#FFF8FA", textDecoration: "none", fontSize: "15px" }}>
                 {PHONE_DISPLAY}
-              </a>
+              </RhinoplastyCallLink>
               <a href={`mailto:${EMAIL}`} style={{ color: "#FFF8FA", textDecoration: "none", fontSize: "15px" }}>
                 {EMAIL}
               </a>

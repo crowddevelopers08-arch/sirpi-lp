@@ -1,4 +1,7 @@
+"use client";
+
 import { PHONE_DISPLAY, PHONE_TEL } from "@/components/elite-minima/config";
+import { track } from "@/components/elite-minima/track";
 
 function ProfileIllustration() {
   return (
@@ -36,7 +39,7 @@ export default function RhinoplastyConsultation() {
         </div>
         <div className="order-3 flex flex-col justify-center gap-3 sm:flex-row lg:col-start-1 lg:row-start-2 lg:justify-start">
           <a href="#enquire" className="inline-flex h-12 items-center justify-center rounded-full bg-[#ED575C] px-7 text-[16px] font-bold text-white transition hover:brightness-95">Book Your Consultation</a>
-          <a href={`tel:${PHONE_TEL}`} className="inline-flex h-12 items-center justify-center rounded-full border-2 border-[#6A113D]/20 bg-white px-7 text-[16px] font-bold text-[#6A113D] transition hover:border-[#6A113D]">Call {PHONE_DISPLAY}</a>
+          <a href={`tel:${PHONE_TEL}`} onClick={() => track("call_click", { section: "rhinoplasty-final-cta" })} className="inline-flex h-12 items-center justify-center rounded-full border-2 border-[#6A113D]/20 bg-white px-7 text-[16px] font-bold text-[#6A113D] transition hover:border-[#6A113D]">Call {PHONE_DISPLAY}</a>
         </div>
       </div>
     </section>

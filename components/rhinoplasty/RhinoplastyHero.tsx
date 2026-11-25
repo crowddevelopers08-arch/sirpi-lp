@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { BRAND_FULL, PHONE_DISPLAY, PHONE_TEL } from "@/components/elite-minima/config";
 import { track } from "@/components/elite-minima/track";
 import { CLOUDINARY_IMAGES } from "@/lib/cloudinary-images";
@@ -36,8 +36,8 @@ const STATS = ["200+ Clients", "500+ Surgeries", "4.9 Rating on Google"];
 const NAV_LINKS = [
   { label: "Home", href: "#top" },
   { label: "Before & After", href: "#before-after" },
-  { label: "Why Sirpi", href: "#why-sirpi" },
-  { label: "Enquire", href: "#enquire" },
+  { label: "Doctor", href: "#doctor" },
+  { label: "Review", href: "#reviews" },
 ];
 
 const PhoneIcon = ({ className = "" }: { className?: string }) => (
@@ -129,27 +129,15 @@ export default function RhinoplastyHero() {
   const [done, setDone] = useState(false);
   const [activeNav, setActiveNav] = useState(NAV_LINKS[0].href);
 
-  // The global Lenis anchor handler can miscalculate an element that sits in
-  // this responsive hero grid. Handle only `#enquire` links here, in capture
-  // phase, so every rhinoplasty CTA lands directly at the form on any screen.
-  useEffect(() => {
-    const scrollToEnquiry = (event: MouseEvent) => {
-      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      const anchor = (event.target as HTMLElement | null)?.closest<HTMLAnchorElement>('a[href="#enquire"]');
-      const target = document.getElementById("enquire");
-      if (!anchor || !target) return;
-
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      const headerHeight = document.querySelector("#top > header")?.getBoundingClientRect().height ?? 0;
-      const destination = Math.max(0, window.scrollY + target.getBoundingClientRect().top - headerHeight - 16);
-      window.history.pushState(null, "", "#enquire");
-      window.scrollTo({ top: destination, behavior: "smooth" });
-    };
-
-    document.addEventListener("click", scrollToEnquiry, true);
-    return () => document.removeEventListener("click", scrollToEnquiry, true);
-  }, []);
+  const scrollToSection = (href: string) => {
+    const target = document.getElementById(href.slice(1));
+    if (!target) return;
+    const headerHeight = document.querySelector("#top > header")?.getBoundingClientRect().height ?? 0;
+    const destination = href === "#top" ? 0 : Math.max(0, window.scrollY + target.getBoundingClientRect().top - headerHeight - 16);
+    setActiveNav(href);
+    window.history.replaceState(null, "", href);
+    window.scrollTo({ top: destination, behavior: "smooth" });
+  };
 
   const set = (k: keyof typeof values) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setValues((v) => ({ ...v, [k]: k === "phone" ? e.target.value.replace(/\D/g, "").slice(0, 10) : e.target.value }));
@@ -195,9 +183,9 @@ export default function RhinoplastyHero() {
     "h-11 w-full rounded-full border border-[#E8C5D3] bg-white px-5 text-[15px] text-[#1f0a14] outline-none transition focus:border-[#6A113D] lg:h-[min(2.31vw,5.09svh)]";
 
   return (
-    <div className="font-[family-name:var(--font-lato)]">
+    <div id="top" className="font-[family-name:var(--font-lato)]">
       {/* ───────────── header ───────────── */}
-      <header className="border-b border-[#F1DCE5] bg-white">
+      <header className="sticky top-0 z-40 border-b border-[#F1DCE5] bg-white">
         <div className="flex items-center justify-between gap-3 px-4 py-3 max-[380px]:gap-2 max-[380px]:px-3 max-[380px]:py-2 sm:px-8 lg:h-[min(5.47vw,12.02svh)] lg:gap-[min(1.89vw,4.16svh)] lg:py-0 lg:px-[7%] xl:px-[11%]">
           <a href="/rhinoplasty" aria-label={`${BRAND_FULL} home`} className="shrink-0">
             <Image src={CLOUDINARY_IMAGES.logo} alt={BRAND_FULL} width={1029} height={402} priority className="h-12 w-auto rounded-lg max-[380px]:h-10 sm:h-16 lg:h-[min(3.79vw,8.32svh)]" />
@@ -212,7 +200,10 @@ export default function RhinoplastyHero() {
                   <li key={l.href}>
                     <a
                       href={l.href}
-                      onClick={() => setActiveNav(l.href)}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        scrollToSection(l.href);
+                      }}
                       aria-current={on ? "true" : undefined}
                       className={`inline-flex items-center rounded-full px-[min(1.05vw,2.31svh)] py-[min(0.47vw,1.04svh)] text-[max(14px,min(0.95vw,2.08svh))] font-semibold whitespace-nowrap transition-colors ${
                         on ? "text-white shadow-sm" : "text-[#4a2a3a] hover:bg-white hover:text-[#6A113D]"
@@ -230,6 +221,10 @@ export default function RhinoplastyHero() {
           <div className="flex items-center gap-2 sm:gap-4 lg:gap-[min(0.84vw,1.85svh)]">
             <a
               href="#enquire"
+              onClick={(event) => {
+                event.preventDefault();
+                scrollToSection("#enquire");
+              }}
               className="hidden h-11 items-center rounded-full px-6 text-[17px] font-semibold whitespace-nowrap text-white transition hover:opacity-90 sm:inline-flex lg:h-[min(2.52vw,5.55svh)] lg:px-[min(1.26vw,2.77svh)] lg:text-[max(14px,min(1.0vw,2.2svh))]"
               style={{ backgroundColor: C.brand }}
             >
@@ -249,9 +244,15 @@ export default function RhinoplastyHero() {
       </header>
 
       {/* ───────────── hero ───────────── */}
-      <section className="relative isolate overflow-hidden lg:flex lg:min-h-[calc(100svh-min(5.47vw,12.02svh)-1px)] lg:items-center" style={{ backgroundColor: C.ground }}>
+      <section
+        className="relative isolate overflow-hidden lg:flex lg:min-h-[calc(100svh-min(5.47vw,12.02svh)-1px)] lg:items-center"
+        style={{ background: "linear-gradient(135deg, #FFF8FA 0%, #F9E8EF 48%, #FFF5F7 100%)" }}
+      >
         {/* background decoration: soft solid shapes, dot patches and a faint wave — behind everything, never clickable */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0 hidden">
+          <span className="absolute inset-y-0 right-0 w-[38%] bg-[linear-gradient(145deg,rgba(106,17,61,.035),rgba(237,87,92,.12))]" />
+          <span className="absolute top-[13%] right-[8%] h-[min(30vw,530px)] w-[min(30vw,530px)] rounded-[42%] border-[28px] border-[#6A113D]/[0.045] rotate-[-16deg]" />
+          <span className="absolute -top-28 left-[38%] h-[260px] w-[260px] rounded-full border border-[#ED575C]/20" />
           {/* big soft discs */}
           <span className="absolute -top-[22%] -left-[10%] aspect-square w-[46vw] max-w-[760px] rounded-full bg-white/45" />
           <span className="absolute -right-[8%] -bottom-[30%] aspect-square w-[40vw] max-w-[660px] rounded-full" style={{ backgroundColor: "rgba(237,87,92,0.07)" }} />
@@ -270,12 +271,27 @@ export default function RhinoplastyHero() {
           <svg className="absolute bottom-[6%] left-[40%] h-[96px] w-[128px]">
             <rect width="100%" height="100%" fill="url(#rh-dots)" />
           </svg>
+          <svg viewBox="0 0 500 300" className="absolute right-[1%] bottom-[8%] h-[220px] w-[360px] max-lg:hidden" fill="none">
+            <path d="M35 255C128 186 148 62 296 46c72-8 112 27 166 73" stroke="rgba(106,17,61,.10)" strokeWidth="2" />
+            <path d="M0 280C110 205 153 99 318 82c75-8 117 30 182 83" stroke="rgba(237,87,92,.14)" strokeDasharray="6 9" strokeWidth="2" />
+          </svg>
           {/* faint wave along the bottom, echoing the wavy circles */}
           <svg viewBox="0 0 1200 60" preserveAspectRatio="none" className="absolute bottom-[3%] left-0 h-[40px] w-full">
             <path d="M0 30 Q 50 6 100 30 T 200 30 T 300 30 T 400 30 T 500 30 T 600 30 T 700 30 T 800 30 T 900 30 T 1000 30 T 1100 30 T 1200 30" fill="none" stroke="rgba(106,17,61,0.08)" strokeWidth="2" vectorEffect="non-scaling-stroke" />
           </svg>
         </div>
-        <div className="relative grid w-full grid-cols-[minmax(0,1fr)] gap-8 px-4 py-6 sm:px-8 lg:grid-cols-[minmax(0,1fr)_min(27.35vw,60.12svh)] lg:items-center lg:gap-5 lg:py-[min(1.58vw,3.47svh)] lg:px-[7%] xl:px-[11%]">
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+          <span className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,.8)_0%,rgba(255,255,255,.24)_46%,rgba(237,87,92,.07)_100%)]" />
+          <svg viewBox="0 0 1440 800" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
+            <path d="M-80 560C180 360 420 770 720 515S1170 230 1520 408V800H-80Z" fill="rgba(106,17,61,.055)" />
+            <path d="M-80 640C180 440 410 825 735 580S1180 315 1520 484V800H-80Z" fill="rgba(237,87,92,.08)" />
+            <path d="M-80 590C180 390 420 800 720 545S1170 260 1520 438" fill="none" stroke="rgba(106,17,61,.13)" strokeWidth="2" />
+            <path d="M-80 670C180 470 410 855 735 610S1180 345 1520 514" fill="none" stroke="rgba(237,87,92,.16)" strokeWidth="2" />
+          </svg>
+          <span className="absolute top-[9%] right-[7%] h-24 w-24 rounded-full border border-[#ED575C]/25 sm:h-36 sm:w-36" />
+          <span className="absolute top-[13%] right-[11%] h-14 w-14 rounded-full bg-white/65 sm:h-20 sm:w-20" />
+        </div>
+        <div className="relative z-10 grid w-full grid-cols-[minmax(0,1fr)] gap-8 px-4 py-6 sm:px-8 lg:grid-cols-[minmax(0,1fr)_min(27.35vw,60.12svh)] lg:items-center lg:gap-5 lg:py-[min(1.58vw,3.47svh)] lg:px-[7%] xl:px-[11%]">
           {/* left: title, location, results, stats */}
           <div className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
             {/* headline: plays in on page entry — the two questions rise in, then a coral swoosh draws under the key words */}

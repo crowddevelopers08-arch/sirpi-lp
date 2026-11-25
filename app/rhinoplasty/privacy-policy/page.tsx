@@ -3,7 +3,8 @@ import Navbared from "@/components/rhinoplasty/thank-navbar";
 import type { Metadata } from "next";
 import Link from "next/link";
 import TodayDate from "@/components/generic-lp/today-date";
-import { EMAIL, PHONE_DISPLAY, PHONE_TEL } from "@/components/elite-minima/config";
+import { EMAIL, PHONE_DISPLAY } from "@/components/elite-minima/config";
+import RhinoplastyCallLink from "@/components/rhinoplasty/RhinoplastyCallLink";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Sirpi Aesthetics",
@@ -201,12 +202,12 @@ export default function PrivacyPolicyPage() {
                   {EMAIL}
                 </a>{" "}
                 or call{" "}
-                <a
-                  href={`tel:${PHONE_TEL}`}
+                <RhinoplastyCallLink
+                  section="rhinoplasty-privacy-policy"
                   style={{ color: "#6A113D", textDecoration: "none" }}
                 >
                   {PHONE_DISPLAY}
-                </a>
+                </RhinoplastyCallLink>
                 .
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", marginTop: "8px" }}>
